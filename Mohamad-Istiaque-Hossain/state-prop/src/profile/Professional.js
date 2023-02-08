@@ -1,12 +1,11 @@
-import { Component } from 'react';
-import './App.css';
+import { Component } from 'react'; 
 
-class Profesisonal extends Component {
+class Professional extends Component {
   render() {
-console.log(this.props.info);
+    
     return (
       <div>
-        <h1>Profesisonal Information</h1>
+        <h3>Professional Information</h3>
         <table>
             <tr>
                 <td>Designation</td>
@@ -26,4 +25,4 @@ console.log(this.props.info);
   }
 }
 
-export default Profesisonal;
+export default Professional;

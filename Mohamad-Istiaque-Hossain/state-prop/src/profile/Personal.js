@@ -1,12 +1,11 @@
-import { Component } from 'react';
-import './App.css';
+import { Component } from 'react'; 
 
 class Personal extends Component {
-  render() {
-console.log(this.props.info);
+  render() { 
+    
     return (
       <div>
-        <h1>Personal Information</h1>
+        <h3>Personal Information</h3>
         <table>
             <tr>
                 <td>Name</td>

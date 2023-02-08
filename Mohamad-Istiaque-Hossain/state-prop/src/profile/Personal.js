@@ -26,6 +26,7 @@ class Personal extends Component {
         </table>
       </div>
     );
+	
   }
 }
 

@@ -4,7 +4,13 @@ import "./App.css";
 
 class Office extends Component {
   render() {
-    return <div>{this.props.information.name}</div>;
+    return (
+      <div>
+        <h2>
+          Name: <b>{this.props.information.name}</b>
+        </h2>
+      </div>
+    );
   }
 }
 

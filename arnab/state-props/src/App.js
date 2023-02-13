@@ -11,10 +11,19 @@ class App extends Component {
     age: 12,
     gender: "Male",
   };
+
+  changeMyName = (name, location, age, gender) => {
+    const dummyState = { ...this.state };
+    dummyState.name = name;
+    dummyState.location = location;
+    dummyState.age = age;
+    dummyState.gender = gender;
+    this.setState(dummyState);
+  };
   render() {
     return (
       <>
-        <Person information={this.state} />
+        <Person information={this.state} changeMyName={this.changeMyName} />
         <Office information={this.state} />
       </>
     );

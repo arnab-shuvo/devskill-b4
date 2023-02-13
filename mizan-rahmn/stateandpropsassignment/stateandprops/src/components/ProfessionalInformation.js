@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 
 class ProfessionalInformation extends Component{
     render() {
+        console.log(this.props, "==this.props");
         return (
           <div>
             <h2>Hello from ProfessionalInformation</h2>
-            <p>phoneNo: { this.props.pri.phoneNo } </p>
-            <p>address: { this.props.pri.address }</p>
-            <p>skills: { this.props.pri.skills.join(', ') }</p>
+            <p>designation: { this.props.professionalInformation.designation } </p>
+            <p>companyName: { this.props.professionalInformation.companyName }</p>
+            <p>skills: { this.props.professionalInformation.skills.join(', ') }</p>
           </div>
         );
     }

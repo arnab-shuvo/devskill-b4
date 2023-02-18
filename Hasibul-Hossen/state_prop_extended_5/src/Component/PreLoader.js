@@ -1,0 +1,42 @@
+import { Component } from "react";
+
+class PreLoader extends Component {
+    render() {
+        return (
+            <div className="body-wrapper">
+                <div class="scene">
+                    <div class="objects">
+                        <div class="square"></div>
+                        <div class="circle"></div>
+                        <div class="triangle"></div>
+                    </div>
+                    <div class="wizard">
+                        <div class="body"></div>
+                        <div class="right-arm">
+                            <div class="right-hand"></div>
+                        </div>
+                        <div class="left-arm">
+                            <div class="left-hand"></div>
+                        </div>
+                        <div class="head">
+                            <div class="beard"></div>
+                            <div class="face">
+                                <div class="adds"></div>
+                            </div>
+                            <div class="hat">
+                                <div class="hat-of-the-hat"></div>
+                                <div class="four-point-star --first"></div>
+                                <div class="four-point-star --second"></div>
+                                <div class="four-point-star --third"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress"></div>
+                <div class="noise"></div>
+            </div>
+        )
+    }
+}
+
+export default PreLoader;

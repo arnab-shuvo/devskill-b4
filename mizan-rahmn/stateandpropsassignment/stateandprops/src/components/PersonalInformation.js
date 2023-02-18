@@ -6,9 +6,11 @@ class PersonalInformation extends Component{
         return (
           <div>
             <h2>Hello from PersonalInformation</h2>
-            <p>name: { this.props.pi.name }</p>
-            <p>age: { this.props.pi.age }</p>
-            <p>gender: { this.props.pi.gender }</p>
+            <p>name: { this.props.personalInformation.name }</p>
+            <p>age: { this.props.personalInformation.age }</p>
+            <p>gender: { this.props.personalInformation.gender }</p>
+            <p>phoneNo: { this.props.personalInformation.phoneNo }</p>
+            <p>address: { this.props.personalInformation.address }</p>
           </div>
         );
     }

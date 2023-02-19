@@ -1,5 +1,13 @@
 import { Component } from "react";
 import { ProductDetails } from "../Product-Details/productDetails";
+import { Loader } from "../Loader/loader";
+
+const defaultProduct = {
+  id: -999,
+  name: "",
+  price: 0,
+  description: "",
+};
 
 export class Product extends Component {
   state = {
@@ -21,42 +29,55 @@ export class Product extends Component {
         description: "This is a keyboard",
       },
     ],
-    selectedProduct: {
-      id: -999,
-      name: "",
-      price: 0,
-      description: "",
-    },
+    selectedProduct: defaultProduct,
+    isLoading: false,
   };
-
-  componentDidUpdate() {
-    alert("Showing Product Details");
-  }
 
   setActiveProduct = (id) => {
-    this.setState({ ...this.state, selectedProduct: this.state.products[id] });
+    const product = this.state.products.find((product) => product.id === id);
+    if (!product) {
+      this.setState({
+        ...this.state,
+        selectedProduct: defaultProduct,
+      });
+    } else {
+      this.setState({ ...this.state, selectedProduct: product });
+    }
   };
+
+  changeLoaderState = () => {
+    this.setState({ ...this.state, isLoading: !this.state.isLoading });
+  };
+
   render() {
     const products = this.state.products;
     const productList = (
-      <ol>
+      <ol style={{ lineHeight: "2em" }}>
         <h2>Products</h2>
         {products.map((product) => (
           <li key={product.id}>
             <button onClick={() => this.setActiveProduct(product.id)}>
-              {product.name} ----------- {product.price}
+              {product.name}: {product.price} Taka
             </button>
           </li>
         ))}
       </ol>
     );
+
     return (
       <div>
         {this.state.selectedProduct.id !== -999 ? (
-          <ProductDetails info={this.state.selectedProduct} />
+          <ProductDetails
+            info={this.state.selectedProduct}
+            isLoading={this.state.isLoading}
+            setActiveProduct={this.setActiveProduct}
+            changeLoaderState={this.changeLoaderState}
+          />
         ) : (
           productList
         )}
+
+        {this.state.isLoading === true ? <Loader /> : null}
       </div>
     );
   }

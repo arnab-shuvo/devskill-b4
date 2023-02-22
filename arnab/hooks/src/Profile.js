@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from "react";
 
 const Profile = (props) => {
-  const [name, setName] = useState("Arnab");
-  const [location, setLocation] = useState("Dhaka");
+  const [hobby, setHobby] = useState("Sleeping");
 
   useEffect(() => {
-    setLocation({ name: "Khulna" });
-  }, [location]);
+    console.log("UseEffect in Profile");
+  }, [props.name, hobby]);
+
+  useEffect(() => {
+    console.log("UseEffect Did mount Profile");
+    return () => {
+      console.log("UseEffect return/cleanup in Profile");
+    };
+  }, []);
 
   return (
     <>
-      <p>My name is : {name}</p>
-      {/* <p>My location is : {location}</p> */}
-      <button onClick={() => setName("Shuvo")}>Name</button>
-      <button onClick={() => setLocation({ name: "Khulna" })}>Location</button>
+      <h5>This is Profile Page</h5>
+      <p>My name is : {props.name}</p>
+      <p>My Hobby is : {hobby}</p>
+      <button onClick={() => setHobby("Long Drive")}>
+        Change Hobby to Long Drove
+      </button>
     </>
   );
 };

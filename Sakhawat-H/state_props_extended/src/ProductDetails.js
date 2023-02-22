@@ -1,11 +1,14 @@
 import { Component } from "react";
+import "./ProductDetails.css";
 
 class ProductDetails extends Component {
   state = {
     product: null,
   };
   componentDidMount() {
-    this.setState({product: this.props.product});
+    setTimeout(() => {
+      this.setState({product: this.props.product});
+    }, 3000);
   }
   render() {
     return (
@@ -18,9 +21,13 @@ class ProductDetails extends Component {
                 <div>price: {this.state.product.price}</div>
                 <div>category: {this.state.product.category}</div>
             </div>:
-            <div>Loading...</div>
+            <div className="LoaderBalls">
+              <div className="LoaderBalls__item"></div>
+              <div className="LoaderBalls__item"></div>
+              <div className="LoaderBalls__item"></div>
+            </div>
         }
-        <input type="button" onClick={() => this.props.selectProduct(null)} value="Back"></input>
+        <input type="button" onClick={() => this.props.selectProduct(null)} value="Back" className="backBtn"></input>
       </>
     );
   }

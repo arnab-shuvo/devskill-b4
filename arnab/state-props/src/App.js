@@ -21,6 +21,7 @@ class App extends Component {
     this.setState(dummyState);
   };
   render() {
+    console.log("");
     return (
       <>
         <Person information={this.state} changeMyName={this.changeMyName} />

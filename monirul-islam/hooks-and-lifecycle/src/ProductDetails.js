@@ -6,14 +6,6 @@ function ProductDetails(props){
     const location=useLocation();
     const data=location.state;
 
-    const [isLoading,SetLoading]=useState(false);
-    const fetchData=()=>{
-       SetLoading(true);
-       setTimeout(()=>{
-           SetLoading(false);
-       },3500)
-    }
-
 return(
     
 <div className='page'>

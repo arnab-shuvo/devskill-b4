@@ -43,13 +43,12 @@
     <!-- banner section-->
 
     <!-- about me section -->
-    <section class="flex flex-row w-full px-20">
-        <!-- <div class="flex flex-col bg-white dark:bg-neutral-700 md:max-w-xl md:flex-row"> -->
-        <div class="w-1/2">
-            <img class="hidden sm:block object-cover h-screen w-full overflow-visible my-5"
+    <section class="flex flex-row w-full px-20 pb-20">
+        <div class="w-1/2 relative">
+            <img class="hidden sm:block absolute object-cover h-screen w-full overflow-visible my-5 z-1"
                 src="https://demo.acmethemes.com/portfolio-web/wp-content/uploads/2019/01/portfolio_man_5.png" alt="" />
         </div>
-        <div class="w-1/2 flex flex-col justify-start p-6 my-28">
+        <div class="sm:w-1/2 flex flex-col justify-start p-6 mt-28">
             <h1 class="mb-6 text-5xl font-black">
                 About Me
             </h1>
@@ -70,9 +69,55 @@
                 </button>
             </div>
         </div>
-        <!-- </div> -->
     </section>
     <!-- about me section -->
+
+    <!-- my skills section -->
+    <section class="bg-fixed object-contain mx-auto max-w-full h-[80vh] relative z-4 text-white text-center"
+        style="background-image: url('https://demo.acmethemes.com/portfolio-web/wp-content/uploads/2019/01/laptop-1209008.jpg')">
+        <div class="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-fixed"
+            style="background-color: rgba(0, 0, 0, 0.6)">
+            <div class="flex flex-col h-full">
+                <h1 class="text-5xl font-black pt-16 opacity-100">
+                    My skills
+                </h1>
+                <div class="m-20 flex flex-row space-x-20 justify-center">
+                    <div>
+                        <div
+                            class="w-48 h-48 rounded-full border-4 border-white flex items-center justify-center opacity-100">
+                            <p class="text-5xl">100%</p>
+                        </div>
+                        <p class="mt-10 uppercase text-2xl font-bold">Photoshop</p>
+                    </div>
+                    <div>
+                        <div
+                            class="w-48 h-48 rounded-full border-4 border-white flex items-center justify-center opacity-100">
+                            <p class="text-5xl">100%</p>
+                        </div>
+                        <p class="mt-10 uppercase text-2xl font-bold">JavaScript</p>
+                    </div>
+                    <div>
+                        <div
+                            class="w-48 h-48 rounded-full border-4 border-white flex items-center justify-center opacity-100">
+                            <p class="text-5xl">100%</p>
+                        </div>
+                        <p class="mt-10 uppercase text-2xl font-bold">Python</p>
+                    </div>
+                    <div>
+                        <div
+                            class="w-48 h-48 rounded-full border-4 border-white flex items-center justify-center opacity-100">
+                            <p class="text-5xl">100%</p>
+                        </div>
+                        <p class="mt-10 uppercase text-2xl font-bold">html & css</p>
+                    </div>
+
+                </div>
+            </div>
+
+
+    </section>
+    <!-- my skills section -->
+
 </body>
 
 </html>

@@ -1,0 +1,57 @@
+body {
+    background-image: url("images/background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#all-canvas {
+    display: flex;
+    justify-content: center;
+}
+
+#skills {
+    background: transparent;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+.skills-title {
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin-bottom: 50px;
+}
+
+.canvas-wrap {
+    position: relative;
+    width: 270px;
+    height: 170px;
+}
+
+span#procent1,
+span#procent2,
+span#procent3,
+span#procent4 {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 30px;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+span#procent1::after,
+span#procent2::after,
+span#procent3::after,
+span#procent4::after {
+    content: "%";
+}
+
+.canvas-label {
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin-top: 10px;
+}

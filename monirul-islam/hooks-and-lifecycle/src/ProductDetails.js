@@ -2,22 +2,19 @@ import { render } from '@testing-library/react';
 import {React,useEffect,useState} from 'react';
 import {useLocation} from 'react-router-dom';
 
-function ProductDetails(props){
-    const location=useLocation();
-    const data=location.state;
+function ProductDetails({productdetail,setProdutDetails}){
+        
+            return(
+            <div style={{paddingLeft:"100px"}}>
+                 <button onClick={()=>setProdutDetails(null)}>home</button>
+                <p>ID:{" "}{productdetail.id}</p>
+                <p>Name:{" "}{productdetail.name}</p>
+                <p>Description:{" "}{productdetail.description}</p>
+                <p>Price:{" "}{productdetail.price}</p>
+                <p>Category:{" "}{productdetail.category}</p>
+            </div>
 
-return(
-    
-<div className='page'>
-
-       <p>ID:{" "}{data?data.product.id:"This Product not found "}</p>
-       <p>Name:{" "}{data.product.name}</p>
-       <p>Description:{" "}{data.product.description}</p>
-       <p>Price:{" "}{data.product.price}</p>
-       <p>Category:{" "}{data.product.category}</p>
-</div>
-
-);
+            );
     
 
 }

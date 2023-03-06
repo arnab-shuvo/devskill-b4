@@ -1,0 +1,8 @@
+.pr_table {
+  width: 100%;
+}
+.pr_table th {
+  background-color: coral;
+  text-align: left;
+  color: #fff;
+}

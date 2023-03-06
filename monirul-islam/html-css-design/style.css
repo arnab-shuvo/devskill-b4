@@ -1,0 +1,29 @@
+h5 {
+    color: blueviolet;
+  
+  }
+  h6 {
+    color:aquamarine;
+  
+  }
+  table{
+    width: 100%;
+    color: blueviolet;
+
+  }
+
+ td{
+  color: black;
+ }
+  body{
+    background-color: aquamarine;
+  }
+  #img_vision{
+     height: 300px;
+     width:300px;
+    padding-right: 100px;
+  }
+  #img_profile{
+    width: 70px;
+    height: 70px;
+  }

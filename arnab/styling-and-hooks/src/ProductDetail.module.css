@@ -1,0 +1,8 @@
+.pr_table {
+  width: 100%;
+}
+.pr_table th {
+  background-color: rgb(87, 41, 235);
+  text-align: left;
+  color: #fff;
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+    <script src="./index.js"></script>
+    <nav class="flex bg-[#F3F8FC]">
+        <img src="./images/logo_free_version.png" alt="header image">
+        <ul class="text-black fixed top-2/4 right-2/4" id="hamburger-menu-items">
+            <li>Home</li>
+            <li>About</li>
+            <li>Blog</li>
+        </ul>
+        <div class="space-y-2 pt-2 fixed right-2" id="hamburger">
+            <span class="block w-5 h-0.5 bg-gray-600"></span>
+            <span class="block w-8 h-0.5 bg-gray-600"></span>
+            <span class="block w-8 h-0.5 bg-gray-600"></span>
+        </div>
+    </nav>
+    <main class="container">
+        <section
+            class="h-content bg-[url('./images/portfolio_man_41920x800.png')] bg-cover bg-no-repeat bg-center relative w-screen"
+            id="home">
+            <div class="flex flex-col">
+                <h1>Fazle Rabbi</h1>
+                <p>Software Engineer</p>
+                <button>Download Resume</button>
+            </div>
+        </section>
+        <section class="flex flex-row relative" id="about">
+            <img class="mt-[-55px]" src="./images/portfolio_man_5.png" alt="">
+            <div>
+                <h1>About me</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                <button>Button</button>
+            </div>
+        </section>
+        <section
+            class="flex flex-wrap items-center justify-center h-screen m-auto mb-12 bg-[url('./images/laptop-1209008.jpg')] bg-fixed bg-center bg-cover relative w-screen">
+            <h1 class="text-4xl text-white font-bold">My Skills</h1>
+            <hr class="w-screen invisible">
+            <h3 class="text-2xl text-white bg-dark-400 bg-opacity-80 rounded-xl mr-5">Python</h3>
+            <h3 class="text-2xl text-white bg-dark-400 bg-opacity-80 rounded-xl mr-5">Django</h3>
+            <h3 class="text-2xl text-white bg-dark-400 bg-opacity-80 rounded-xl mr-5">TypeScript</h3>
+            <h3 class="text-2xl text-white bg-dark-400 bg-opacity-80 rounded-xl mr-5">Reactjs</h3>
+        </section>
+        <section class="flex flex-wrap items-center justify-center relative w-screen">
+            <h1 class="text-4xl text-black font-bold">My Services</h1>
+            <hr class="w-screen invisible">
+            <div
+                class="flex flex-col items-center justify-center border-4 border-none bg-white-400 shadow-xl max-w-sm w-46 h-12 mr-6 p-20 transition ease-in-out delay-80 hover:-translate-y-2 duration-300">
+                <h2 class="font-bold">Business Process Automation</h2>
+                <p class="break-all">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+            </div>
+            <div
+                class="flex flex-col items-center justify-center border-4 border-none bg-white-400 shadow-xl max-w-sm w-46 h-12 mr-6 p-20 transition ease-in-out delay-80 hover:-translate-y-2 duration-300">
+                <h2 class="font-bold">Web Development</h2>
+                <p class="break-all">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+            </div>
+            <div
+                class="flex flex-col items-center justify-center border-4 border-none bg-white-400 shadow-xl max-w-sm w-46 h-12 mr-6 p-20 transition ease-in-out delay-80 hover:-translate-y-2 duration-300">
+                <h2 class="font-bold">Data Analysis</h2>
+                <p class="break-all">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+            </div>
+        </section>
+        <!-- <section>
+            <h1>Experience</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+            <button>Button</button>
+        </section>
+        <section>
+            <h1>Experience</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+            <button>Button</button>
+        </section>
+        <section>
+            <h1>Contact me</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+            <button>Button</button>
+        </section> -->
+        <footer class="section footer">
+            <ul class="footer-links">
+                <li>
+                    <a href="#home" class="footer-link">home</a>
+                </li>
+                <li>
+                    <a href="#about" class="footer-link">about</a>
+                </li>
+                <li>
+                    <a href="#services" class="footer-link">services</a>
+                </li>
+                <li>
+                    <a href="#featured" class="footer-link">featured</a>
+                </li>
+            </ul>
+            <ul class="footer-icons">
+                <li>
+                    <a href="https://www.twitter.com" target="_blank" class="footer-icon"><i
+                            class="fab fa-facebook"></i></a>
+                </li>
+                <li>
+                    <a href="https://www.twitter.com" target="_blank" class="footer-icon"><i
+                            class="fab fa-twitter"></i></a>
+                </li>
+                <li>
+                    <a href="https://www.twitter.com" target="_blank" class="footer-icon"><i
+                            class="fab fa-squarespace"></i></a>
+                </li>
+            </ul>
+            <p class="copyright">
+                copyright &copy; Fazle Rabbi
+                <span id="date"></span> all rights reserved
+            </p>
+        </footer>
+    </main>
+
+</body>
+
+</html>

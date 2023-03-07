@@ -1,0 +1,1 @@
+run this command to see the styling **npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch**

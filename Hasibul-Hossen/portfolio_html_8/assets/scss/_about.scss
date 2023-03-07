@@ -1,0 +1,176 @@
+/*----------------------------------------*/
+/*  04. About
+/*----------------------------------------*/
+.bd-about-img {
+    position: relative;
+    z-index: 1;
+    .bd-about-seconday-img {
+        position: absolute;
+        top: 60px;
+        right: 30px;
+        @media #{$md,$xs} {
+            right: 0px;
+        }
+        @media #{$xxs} {
+            display: none;
+        }
+    }
+}
+.bd-about-shape-box {
+    position: relative;
+    .bd-about-shape {
+        position: absolute;
+    }
+    .bd-about-shape-1 {
+        bottom: 40px;
+        left: -60px;
+        @media #{$xxl} {
+            left: -220px;
+        }
+        @media #{$xl,$lg,$md,$xs} {
+            display: none;
+        } 
+    }
+    .bd-about-shape-2 {
+        top: 49%;
+        left: 8.5%;
+        @media #{$lg} {
+            top: 25%;
+            left: auto;
+            right: 80px;
+        }
+        @media #{$md,$xs} {
+            display: none;
+        }
+    }
+    .bd-about-shape-3 {
+        margin-left: 20px;
+        margin-top: -20px;
+        -webkit-animation: hero-circle-1 6s linear 0s infinite alternate;
+        -moz-animation: hero-circle-1 6s linear 0s infinite alternate;
+        -o-animation: hero-circle-1 6s linear 0s infinite alternate;
+        animation: hero-circle-1 6s linear 0s infinite alternate;
+        @media #{$xxs} {
+            display: none;
+        }
+    }
+    .bd-about-shape-4 {
+        margin-left: 40px;
+        margin-top: 12px;
+        animation-duration: 2.5s;
+        -webkit-animation: hero-thumb-animation 4s linear infinite alternate;
+        -moz-animation: hero-thumb-animation 4s linear infinite alternate;
+        -o-animation: hero-thumb-animation 4s linear infinite alternate;
+        animation: hero-thumb-animation 4s linear infinite alternate;
+    }
+    .bd-about-shape-5 {
+        bottom: -140px;
+        left: 220px;
+        animation-duration: 2.5s;
+        animation-fill-mode: both;
+        animation-iteration-count: infinite;
+        animation-name: hero-bounce;
+        @media #{$xl} {
+            left: 130px;
+        }
+        @media #{$lg} {
+            left: 200px;
+        }
+        @media #{$md,$xs} {
+            display: none;
+        }
+    }
+    .bd-about-shape-6 {
+        bottom: -40px;
+        left: -46px;
+        z-index: -1;
+        -webkit-animation: hero-dot-1 2s linear 0s infinite alternate;
+        -moz-animation: hero-dot-1 2s linear 0s infinite alternate;
+        -o-animation: hero-dot-1 2s linear 0s infinite alternate;
+        animation: hero-dot-1 2s linear 0s infinite alternate;
+    }
+}
+.bd-about-text.pt-95 {
+    @media #{$xl} {
+        padding-top: 0px;
+    }
+    @media #{$lg} {
+        padding-top: 120px;
+    }
+    @media #{$md,$xs} {
+        padding-top: 115px;
+    }
+    @media #{$xxs} {
+        padding-top: 50px;
+    }
+}
+.md-pr-50 {
+    @media #{$lg} {
+        padding-right: 50px;
+    }
+}
+.xss-w-full {
+    @media #{$xxs} {
+        width: 100%;
+    }
+}
+
+// animation keyframe
+
+@keyframes hero-dot-1 {
+    0% {
+        transform: translateY(-60px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+@keyframes hero-dot-2 {
+    0% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-60px);
+    }
+}
+@keyframes hero-circle-1{
+    0%{
+        @include transform(rotate(0deg));
+    }
+    100%{
+        @include transform(rotate(360deg));
+    }
+}
+@keyframes hero-bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-30px);}
+    60% {transform: translateY(-15px);}
+}
+@keyframes hero-thumb-animation {
+	0% {
+	  -webkit-transform: translateX(80px);
+	  -moz-transform: translateX(80px);
+	  -ms-transform: translateX(80px);
+	  transform: translateX(80px);
+	}
+	100% {
+	  -webkit-transform: translateX(0px);
+	  -moz-transform: translateX(0px);
+	  -ms-transform: translateX(0px);
+	  transform: translateX(0px);
+	}
+  }
+  @keyframes hero-thumb-animation2 {
+	0% {
+	  -webkit-transform: translateX(-80px);
+	  -moz-transform: translateX(-80px);
+	  -ms-transform: translateX(-80px);
+	  transform: translateX(-80px);
+	}
+	100% {
+	  -webkit-transform: translateX(0px);
+	  -moz-transform: translateX(0px);
+	  -ms-transform: translateX(0px);
+	  transform: translateX(0px);
+	}
+  }

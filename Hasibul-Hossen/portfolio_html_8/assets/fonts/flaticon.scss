@@ -1,0 +1,105 @@
+$flaticon-font: "flaticon";
+
+@font-face {
+    font-family: $flaticon-font;
+    src: url("./flaticon.ttf?f1ab099e90af27a5bd00a2c90cc0a592") format("truetype"),
+url("./flaticon.woff?f1ab099e90af27a5bd00a2c90cc0a592") format("woff"),
+url("./flaticon.woff2?f1ab099e90af27a5bd00a2c90cc0a592") format("woff2"),
+url("./flaticon.eot?f1ab099e90af27a5bd00a2c90cc0a592#iefix") format("embedded-opentype"),
+url("./flaticon.svg?f1ab099e90af27a5bd00a2c90cc0a592#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon-map: (
+    "search": "\f101",
+    "help": "\f102",
+    "coding": "\f103",
+    "notes": "\f104",
+    "phone-call": "\f105",
+    "mail-inbox-app": "\f106",
+    "location": "\f107",
+    "align-left": "\f108",
+    "email-marketing": "\f109",
+    "strategy": "\f10a",
+    "stats": "\f10b",
+    "play": "\f10c",
+    "email": "\f10d",
+    "email-1": "\f10e",
+    "download": "\f10f",
+    "project-management": "\f110",
+    "sketch-tools": "\f111",
+    "phone-call-1": "\f112",
+    "email-2": "\f113",
+    "location-1": "\f114",
+);
+
+.flaticon-search:before {
+    content: map-get($flaticon-map, "search");
+}
+.flaticon-help:before {
+    content: map-get($flaticon-map, "help");
+}
+.flaticon-coding:before {
+    content: map-get($flaticon-map, "coding");
+}
+.flaticon-notes:before {
+    content: map-get($flaticon-map, "notes");
+}
+.flaticon-phone-call:before {
+    content: map-get($flaticon-map, "phone-call");
+}
+.flaticon-mail-inbox-app:before {
+    content: map-get($flaticon-map, "mail-inbox-app");
+}
+.flaticon-location:before {
+    content: map-get($flaticon-map, "location");
+}
+.flaticon-align-left:before {
+    content: map-get($flaticon-map, "align-left");
+}
+.flaticon-email-marketing:before {
+    content: map-get($flaticon-map, "email-marketing");
+}
+.flaticon-strategy:before {
+    content: map-get($flaticon-map, "strategy");
+}
+.flaticon-stats:before {
+    content: map-get($flaticon-map, "stats");
+}
+.flaticon-play:before {
+    content: map-get($flaticon-map, "play");
+}
+.flaticon-email:before {
+    content: map-get($flaticon-map, "email");
+}
+.flaticon-email-1:before {
+    content: map-get($flaticon-map, "email-1");
+}
+.flaticon-download:before {
+    content: map-get($flaticon-map, "download");
+}
+.flaticon-project-management:before {
+    content: map-get($flaticon-map, "project-management");
+}
+.flaticon-sketch-tools:before {
+    content: map-get($flaticon-map, "sketch-tools");
+}
+.flaticon-phone-call-1:before {
+    content: map-get($flaticon-map, "phone-call-1");
+}
+.flaticon-email-2:before {
+    content: map-get($flaticon-map, "email-2");
+}
+.flaticon-location-1:before {
+    content: map-get($flaticon-map, "location-1");
+}

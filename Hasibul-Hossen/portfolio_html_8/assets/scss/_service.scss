@@ -1,0 +1,41 @@
+/*----------------------------------------*/
+/*  05. Service
+/*----------------------------------------*/
+
+.bd-service {
+    border-radius: 5px;
+    background: var(--clr-common-white);
+    @include transition(0.3s);
+    padding: 38px 35px 30px 35px;
+    min-height: calc(100% - 30px);
+    &:hover {
+        box-shadow: 0px 20px 30px rgba(55,7,23,0.07);
+        i {
+            animation-name: wobble-vertical;
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: 3;
+        }
+    }
+    p {
+        font-size: 16px;
+        line-height: 1.75;
+    }
+}
+.bd-service-title {
+    font-size: 22px;
+    font-weight: 600;
+    @include transition(0.3s);
+    a:hover {
+        color: var(--clr-theme-1);
+    }
+}
+.bd-service-icon {
+    i {
+        font-size: 50px;
+        line-height: 1;
+        display: inline-block;
+        color: var(--clr-theme-1);
+    }
+}
+

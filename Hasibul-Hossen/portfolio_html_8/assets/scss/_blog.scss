@@ -1,0 +1,113 @@
+/*----------------------------------------*/
+/*  07. Blog
+/*----------------------------------------*/
+.bd-blog {
+	border-radius: 10px;
+	overflow: hidden;
+    img {
+        width: 100%;
+    }
+    .bd-blog-img {
+        overflow: hidden;
+    }
+    &:hover {
+        .bd-blog-img {
+            img {
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+        }
+    }
+}
+.bd-blog-meta {
+    ul {
+        li {
+            display: inline-block;
+            list-style: none;
+            margin-right: 35px;
+            @media #{$lg,$xxs} {
+                margin-right: 10px;
+            }
+            &:last-child {
+                margin-right: 0px;
+            }
+            a {
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--clr-body-text);
+                @include transition(0.3s);
+                text-transform: uppercase;
+                &:hover {
+                    color: var(--clr-theme-1);
+                }
+                i {
+                    margin-right: 8px;
+                    transform: translateY(2px);
+                    color: var(--clr-theme-1);
+                    @media #{$lg,$xxs} {
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
+.bd-blog-text {
+    padding: 25px 35px 30px 35px;
+    background-color: var(--clr-bg-gray);
+    @media #{$lg,$md,$xs} {
+        padding: 25px 30px 30px 30px;
+    }
+}
+.bd-blog-text-six {
+    background-color: var(--clr-common-white);
+}
+.bd-blog-title {
+    font-size: 22px;
+    line-height: 1.45;
+    font-weight: 600;
+    @media #{$lg} {
+        font-size: 18px;
+    }
+    a:hover {
+        color: var(--clr-theme-1);
+    }
+}
+.bd-blog-author {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.bd-blog-author-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    img {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        border: 2px solid var(--clr-common-white);
+        margin-right: 8px;
+    }
+}
+.bd-blog-author-info-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--clr-body-text);
+    line-height: 1;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+}
+.bd-blog-author-link a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--clr-body-text);
+    text-transform: uppercase;
+    @include transition(0.3s);
+    &:hover {
+        color: var(--clr-theme-1);
+        i {
+            padding-left: 3px;
+            display: inline-block;
+        }
+    }
+}

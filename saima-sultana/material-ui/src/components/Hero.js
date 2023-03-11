@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Banner = () => {
+const Hero = () => {
     return (
-        //    banner section
+        //hero section
         <section
             className='bg-[url("https://demo.acmethemes.com/portfolio-web/wp-content/uploads/2019/01/portfolio_man_41920x800.png")] object-cover h-[30rem] w-full bg-cover text-gray-700'>
             <div className="max-w-7xl mx-auto py-36 px-4 sm:px-6 lg:px-8 text-left">
@@ -29,8 +29,8 @@ const Banner = () => {
                 </div>
             </div>
         </section>
-        // banner section
+        //hero section
     );
 };
 
-export default Banner;
+export default Hero;

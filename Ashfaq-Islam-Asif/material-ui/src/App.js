@@ -1,11 +1,13 @@
 import "./App.css";
 import { Box } from "@mui/material";
-import Header from "./Components/Header";
+import Introduction from "./Components/Introduction";
+import AboutMe from "./Components/AboutMe";
 
 function App() {
   return (
     <Box>
-      <Header />
+      <Introduction />
+      <AboutMe />
     </Box>
   );
 }

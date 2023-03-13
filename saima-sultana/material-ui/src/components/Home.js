@@ -1,12 +1,14 @@
 import React from 'react';
-import AboutMe from './AboutMe';
+import About from './About';
 import Hero from './Hero';
+import Skills from './Skills';
 
 const Home = () => {
     return (
         <div>
             <Hero/>
-            <AboutMe/>
+            <About/>
+            <Skills/>
         </div>
     );
 };

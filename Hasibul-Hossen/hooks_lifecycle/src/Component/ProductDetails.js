@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Preloader from "./PreLoader";
 
-const ProductDetails = ({ selectProduct, product }) => {
+const ProductDetails = ({ product }) => {
     const {name,brand,price,quality} = product || {};
     const [showPreloader, setShowPreloader] = useState(true)
 

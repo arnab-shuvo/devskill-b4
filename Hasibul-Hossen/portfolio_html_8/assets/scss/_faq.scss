@@ -1,0 +1,58 @@
+/*----------------------------------------*/
+/*  18. Faq
+/*----------------------------------------*/
+.bd-faqs {
+    .accordion-item {
+        margin-bottom: 15px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        overflow: hidden;
+    }
+    .accordion-button {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--clr-body-heading);
+        padding: 20px 40px 20px 20px;
+        background-color: var(--clr-bg-gray);
+        border: none;
+        border-radius: 0px;
+        display: block;
+        position: relative;
+        &:after {
+            background: none;
+            content: '\f067';
+            font-family: "Font Awesome 5 Pro";
+            margin: 0px;
+            position: absolute;
+            top: 19px;
+            right: 20px;
+            text-align: right;
+        }
+    }
+    .accordion-button:not(.collapsed)::after {
+        background-image: none;
+        content: '\f068';
+        font-family: "Font Awesome 5 Pro";
+        transform: rotate(180deg);
+        margin: 0px;
+        right: 15px;
+    }
+    .accordion-body {
+        border: none;
+        padding: 0px 20px 15px 20px;
+        background-color: var(--clr-bg-gray);
+        p {
+            margin-bottom: 0px;
+        }
+    }
+    .accordion-collapse {
+        border: none;
+    }
+    .accordion-button:focus {
+        box-shadow: none;
+    }
+    .accordion-item:first-of-type .accordion-button {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+}

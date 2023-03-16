@@ -1,0 +1,60 @@
+/*----------------------------------------*/
+/*  17. Video
+/*----------------------------------------*/
+.bd-video-text {
+    .bd-video-icon {
+        height: 100px;
+        width: 100px;
+        border: 18px solid rgba(255,255,255,0.15);
+        display: inline-block;
+        border-radius: 50%;
+        text-align: center;
+        animation: pulse 2s infinite;
+        a {
+            height: 65px;
+            width: 65px;
+            line-height: 65px;
+            background: var(--clr-common-white);
+            text-align: center;
+            font-size: 16px;
+            color: var(--clr-theme-1);
+            border-radius: 50%;
+            display: inline-block;
+            &:hover {
+               color: var(--clr-common-white);
+               background: var(--clr-theme-1);
+            }
+        }
+    }
+}
+.bd-video-title {
+    font-size: 60px;
+    font-weight: 700;
+    color: var(--clr-common-white);
+    @media #{$lg} {
+        font-size: 50px;
+    }
+    @media #{$md} {
+        font-size: 46px;
+    }
+    @media #{$xs} {
+        font-size: 36px;
+    }
+}
+.bd-video-area {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    &:before {
+        position: absolute;
+        content: '';
+        height: 100%;
+        width: 100%;
+        background: rgba(22, 22, 22,0.75);
+        top: 0px;
+        left: 0px;
+        z-index: -1;
+    }
+}

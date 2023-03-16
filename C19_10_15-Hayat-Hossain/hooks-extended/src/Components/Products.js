@@ -50,10 +50,10 @@ const Products = () => {
 }
 
 useEffect(() => {
-  setLoading(true)
+ 
   setTimeout(() => {
     setProductIndex({index: product[3].currentproduct, visibility:true})
-    setLoading(false)
+
   }, 3000);
 }, [productIndex]);
 

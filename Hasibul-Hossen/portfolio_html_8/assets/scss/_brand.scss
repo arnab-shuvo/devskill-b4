@@ -1,0 +1,17 @@
+/*----------------------------------------*/
+/*  08. Brand
+/*----------------------------------------*/
+.bd-brand-single img {
+    opacity: 0.2;
+}
+.bd-brand-single img:hover {
+    opacity: 1;
+}
+.bd-brand-single {
+    text-align: center;
+}
+.bd-brand-item.text-center {
+    @media #{$xs} {
+        text-align: start !important;
+    }
+}

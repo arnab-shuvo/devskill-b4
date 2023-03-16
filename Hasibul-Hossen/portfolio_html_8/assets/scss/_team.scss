@@ -1,0 +1,55 @@
+/*----------------------------------------*/
+/*  13. Team
+/*----------------------------------------*/
+.bd-team-four {
+    span {
+        font-size: 15px;
+        color: var(--clr-common-white);
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+    .bd-team-four-text {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        margin: 0 auto;
+        bottom: -100%;
+        @include transition(0.5s);
+        text-align: center;
+        z-index: 2;
+    }
+    &:hover {
+        .bd-team-four-text {
+            bottom: 30px;
+        }
+    }
+}
+.bd-team-four-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--clr-common-white);
+}
+.bd-team-four-social {
+    ul {
+        li {
+            display: inline-block;
+            list-style: none;
+            margin: 0px 5px;
+            a {
+                height: 36px;
+                width: 36px;
+                line-height: 36px;
+                display: inline-block;
+                border-radius: 3px;
+                font-size: 14px;
+                color: var(--clr-common-white);
+                text-align: center;
+                background: rgba(22,22,22,0.22);
+                &:hover {
+                    background: var(--clr-theme-1);
+                }
+            }
+        }
+    }
+}

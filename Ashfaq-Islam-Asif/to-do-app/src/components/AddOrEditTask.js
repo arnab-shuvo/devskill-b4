@@ -97,9 +97,10 @@ const AddOrEditTask = ({ dataForEdit, dialogOpen, onClose, buttonAction }) => {
                 <Button
                     variant={"contained"}
                     onClick={() => {
-                        if (title == "" || details == "") {
-                            if (title == "") setShowTitleError(true);
-                            if (details == "") setShowDetailsError(true);
+                        if (title.trim() == "" || details.trim() == "") {
+                            if (title.trim() == "") setShowTitleError(true);
+                            if (details.trimI() == "")
+                                setShowDetailsError(true);
                             return;
                         }
                         buttonAction({

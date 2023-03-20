@@ -28,7 +28,9 @@ function App() {
   }
   const handleDelete = (todoNo) => {
     const remainingTodos = todos.filter((todo) => todo.no !== todoNo);
-    setTodos(remainingTodos);
+    if(window.confirm("Are you sure you want to delete this todo?")){
+      setTodos(remainingTodos);
+    }
     if (remainingTodos.length === 0) {
       alert("The todo list is going to be empty");
     }

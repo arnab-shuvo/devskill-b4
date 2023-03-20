@@ -1,11 +1,4 @@
 import React from 'react';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faAlignJustify,
-  faCircleCheck, faPen, faTrashCan
-} from '@fortawesome/free-solid-svg-icons'
-import { padding, width } from '@mui/system';
 import Grid from '@mui/material/Grid';
 import {styled} from '@mui/material/styles';
 import Paper from '@mui/material/Paper';

@@ -1,23 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const AddTodo = () => {
-    const [todo, setTodo] = useState('');
-    const handleTodo = (e) => {
-        setTodo(e.target.value);
-    }
-    const handleAdd = () => {
-        if (!todo){
-            alert('Please enter a todo');
-        }
-        else{
-            
-        }
-    }
+const AddTodo = ({ todos, handleAdd, handleTodo, todo }) => {
+
     return (
         <div className="flex justify-center my-6 space-x-4">
             <div>
                 <div className="relative mb-3 xl:w-96">
-                    <input onChange={handleTodo}
+                    <input onChange={handleTodo} value={todo}
                         type="text"
                         className="peer m-0 block h-[48px] w-full rounded border border-solid border-neutral-300 bg-white bg-clip-padding py-4 px-3 text-base font-normal leading-tight text-neutral-700 ease-in-out placeholder:text-transparent focus:border-primary focus:bg-white focus:pt-[1.625rem] focus:pb-[0.625rem] focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:bg-neutral-800 dark:text-neutral-200 [&:not(:placeholder-shown)]:pt-[1.625rem] [&:not(:placeholder-shown)]:pb-[0.625rem]"
                         id="floatingInput"

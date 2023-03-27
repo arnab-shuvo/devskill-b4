@@ -5,7 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { NavLink } from "../NavLink/NavLink";
 import { Grid } from "@mui/material";
 
-export default function Sidebar() {
+export default function Navbar() {
   return (
     <AppBar position="static">
       <Toolbar component="div">

@@ -23,7 +23,7 @@ function App() {
         }
       />
       <Route
-        path="/product-details"
+        path="/product-details/:id"
         element={<Layout title="Product Detail">{<ProductDetails />}</Layout>}
       />
       <Route
@@ -38,7 +38,10 @@ function App() {
         path="/edit-product"
         element={<Layout title="Edit Product">{<EditProduct />}</Layout>}
       />
-      <Route path="/*" element={<NotFound />} />
+      <Route
+        path="/*"
+        element={<Layout title="Page Not Found">{<NotFound />}</Layout>}
+      />
     </Routes>
   );
 }

@@ -38,11 +38,11 @@ function Navigation() {
         // open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Create Product</MenuItem>
+        <MenuItem onClick={handleClose}><Link to={`/add-product`}>Create Product</Link></MenuItem>
         <MenuItem onClick={handleClose}>Edit Product</MenuItem>
         <MenuItem onClick={handleClose}>
           {" "}
-          <Link to={`product-detail/`}>Learn More</Link>
+          <Link to={`/add-product`}>Learn More</Link>
           Delete Product
         </MenuItem>
 

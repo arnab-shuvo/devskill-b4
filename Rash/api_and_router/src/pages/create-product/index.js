@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 import { TextField, Button } from '@mui/material';
 import axios from 'axios';
 
-const handleSubmit = async (event) => {
-  event.preventDefault();
-  try {
-    const response = await axios.post('https://api.escuelajs.co/api/v1/products/', product);
-    console.log(response.data);
-    // Clear the form fields
-    setProduct({
-      title: '',
-      price: '',
-      description: '',
-      categoryId: '',
-      images: '',
-    });
-  } catch (error) {
-    console.error(error);
-  }
-};
+// const handleSubmit = async (event) => {
+//   event.preventDefault();
+//   try {
+//     const response = await axios.post('https://api.escuelajs.co/api/v1/products/', product);
+//     console.log(response.data);
+//     // Clear the form fields
+//     setProduct({
+//       title: '',
+//       price: '',
+//       description: '',
+//       categoryId: '',
+//       images: '',
+//     });
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
 const AddProductForm = () => {
   const [product, setProduct] = useState({
@@ -34,9 +34,22 @@ const AddProductForm = () => {
     setProduct({ ...product, [name]: value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Send the product data to the API endpoint
+    try {
+      const response = await axios.post('https://api.escuelajs.co/api/v1/products/', product);
+      console.log(response.data);
+      // Clear the form fields
+      setProduct({
+        title: '',
+        price: '',
+        description: '',
+        categoryId: '',
+        images: '',
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

@@ -21,7 +21,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/product-detail/:id" element={<ProductDetail />} />
-      <Route path="/add-product" component={AddProductForm} />
+      <Route path="/add-product" element={< AddProductForm />} />
       <Route path="/*" element={<NotFound />} />
     </Routes>
   );

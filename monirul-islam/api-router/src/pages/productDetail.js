@@ -178,13 +178,30 @@ function ProductDetail() {
                                     </td>
                                 </tr>
                             </Box>
-
+                         
                             <Box>
                                 <tr>
                                     <td style={{ fontSize: "17px", width: "35%", textAlign: "left" }}> Image: </td>
 
                                     <td >
                                         <img style={{ width: "200px", height: "100px" }} src={product.images[0]} />
+                                    </td>
+                                  
+                                </tr>
+                            </Box>
+                            <Box>
+                                <tr>
+                                    <td style={{ fontSize: "17px", width: "25%", textAlign: "left" }}>New Image: </td>
+
+                                    <td style={{  width: "75%", textAlign: "left" }}>
+                                        <Input
+                                            id="standard-basic"
+                                            lebel="images"
+                                            type="file"
+                                            variant="standard"
+                                            onChange={(e) => setValue(e.target.value, "images")}
+                                            placeholder="Product Image"
+                                        />
                                     </td>
                                 </tr>
                             </Box>

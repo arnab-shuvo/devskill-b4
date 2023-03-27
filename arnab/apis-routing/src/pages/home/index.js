@@ -1,3 +1,5 @@
+/** @format */
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
@@ -18,14 +20,16 @@ const DetailButton = styled(Link)({
   borderRadius: 4,
 });
 
+const product = [];
+
 function App() {
-  const [products, setProduct] = useState([]);
+  // const [products, setProduct] = useState([]);
   let [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     axios
       .get("https://api.escuelajs.co/api/v1/products?offset=0&limit=30")
       .then((res) => {
-        setProduct(res.data);
+        product = res.data;
       });
   }, []);
 
@@ -64,5 +68,9 @@ function App() {
     </Grid>
   );
 }
+
+const SecondaryComponent = () => {
+  return <>{product.title}</>;
+};
 
 export default App;

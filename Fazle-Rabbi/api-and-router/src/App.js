@@ -24,7 +24,11 @@ function App() {
       />
       <Route
         path="/product-details/:id"
-        element={<Layout title="Product Detail">{<ProductDetails />}</Layout>}
+        element={
+          <Layout title="Product Detail">
+            {<ProductDetails setProducts={setProducts} />}
+          </Layout>
+        }
       />
       <Route
         path="/create-product"
@@ -35,12 +39,16 @@ function App() {
         }
       />
       <Route
-        path="/edit-product"
-        element={<Layout title="Edit Product">{<EditProduct />}</Layout>}
+        path="/edit-product/*"
+        element={
+          <Layout title="Edit Product">
+            {<EditProduct setProducts={setProducts} />}
+          </Layout>
+        }
       />
       <Route
         path="/*"
-        element={<Layout title="Page Not Found">{<NotFound />}</Layout>}
+        element={<Layout title="Invalid Link">{<NotFound />}</Layout>}
       />
     </Routes>
   );

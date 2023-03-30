@@ -8,7 +8,7 @@ export default function Layout({ children, title }) {
   return (
     <Box>
       <Navbar />
-      <Typography ml={2} mt={2} gutterBottom paragraph variant="h4">
+      <Typography ml={2} mt={2} gutterBottom paragraph variant="h5">
         {title}
       </Typography>
       {children}

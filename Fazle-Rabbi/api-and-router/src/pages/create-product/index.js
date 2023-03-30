@@ -41,22 +41,16 @@ const CreateProduct = ({ products, setProducts }) => {
     };
 
     setOpen(!open);
-    // axios
-    //   .post("https://api.escuelajs.co/api/v1/products/", {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     data: JSON.stringify(payload),
-    //   })
     axios
-      .request({
-        method: "post",
-        url: "https://api.escuelajs.co/api/v1/products/",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify(payload),
-      })
+      .post(
+        "https://api.escuelajs.co/api/v1/products/",
+        JSON.stringify(payload),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         console.log("Product created", JSON.stringify(res.data));
         setProducts([...products, res.data]);

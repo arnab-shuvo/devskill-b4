@@ -15,6 +15,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Divider from "@mui/material/Divider";
+import { useParams } from "react-router-dom";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -39,7 +40,7 @@ const columns = [
 
 const ProductDetails = ({ setProducts }) => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const params = useParams();
   const [open, setOpen] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [product, setProduct] = useState([{}]);
@@ -66,7 +67,7 @@ const ProductDetails = ({ setProducts }) => {
   useEffect(() => {
     setOpen(!open);
     axios
-      .get(`https://api.escuelajs.co/api/v1/products/${location.state.id}`)
+      .get(`https://api.escuelajs.co/api/v1/products/${params.id}`)
       .then((response) => {
         setOpen(false);
         setProduct([
@@ -102,7 +103,7 @@ const ProductDetails = ({ setProducts }) => {
             <Button
               onClick={() =>
                 navigate(`/edit-product/${product[0].id}`, {
-                  state: { id: product[0].id, product },
+                  state: { product },
                 })
               }
             >

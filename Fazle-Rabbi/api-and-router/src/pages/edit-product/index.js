@@ -7,14 +7,29 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BackDrop from "../../components/BackDrop/BackDrop";
 import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const EditProduct = ({ setProducts }) => {
   const location = useLocation();
+  const params = useParams();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [validation, setValidation] = useState(false);
-  const { id, product } = location.state;
-  const [productInfo, setProductInfo] = useState(product[0]);
+  const [validation, setValidation] = useState(true);
+  const [productInfo, setProductInfo] = useState(
+    location.state
+      ? location.state.product[0]
+      : {
+          title: "",
+          price: "",
+          description: "",
+          image: "",
+        }
+  );
+
+  useEffect(() => {
+    if (!location.state) navigate("/error");
+  });
 
   const editProduct = () => {
     setValidation(true);
@@ -39,7 +54,7 @@ const EditProduct = ({ setProducts }) => {
     setOpen(!open);
     axios
       .put(
-        `https://api.escuelajs.co/api/v1/products/${id}`,
+        `https://api.escuelajs.co/api/v1/products/${params.id}`,
         JSON.stringify(payload),
         {
           headers: {

@@ -2,63 +2,21 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BackDrop from "../../components/BackDrop/BackDrop";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setEditProduct, setProducts } from "../../reducer/productsReducer";
+import { setEditProduct } from "../../reducer/productsReducer";
+import { editProduct } from "../../action/product";
 
 const EditProduct = () => {
   const dispatch = useDispatch();
-  const productInfo = useSelector((store) => store.productsReducer.editProduct);
   const params = useParams();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
-  const [validation, setValidation] = useState(true);
 
-  const editProduct = () => {
-    setValidation(true);
-    const price = Number(productInfo.price);
-    if (
-      productInfo.title === "" ||
-      productInfo.price === "" ||
-      productInfo.description === "" ||
-      productInfo.image === "" ||
-      !price
-    )
-      return;
-
-    // submiting the form
-    const payload = {
-      title: productInfo.title,
-      price: price,
-      description: productInfo.description,
-      images: [productInfo.image],
-    };
-
-    setOpen(!open);
-    axios
-      .put(
-        `https://api.escuelajs.co/api/v1/products/${params.id}`,
-        JSON.stringify(payload),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((res) => {
-        dispatch(setProducts([]));
-        setOpen(false);
-        navigate("/");
-      })
-      .catch((err) => {
-        setOpen(false);
-        alert("Error editing product");
-      });
-  };
+  const productInfo = useSelector((store) => store.products.editProduct);
+  const open = useSelector((store) => store.loader.open);
+  const validation = useSelector((store) => store.loader.validation);
 
   return (
     <Grid item md={12} xs={12}>
@@ -96,13 +54,21 @@ const EditProduct = () => {
             size="small"
             variant="contained"
             endIcon={<KeyboardArrowRightIcon />}
-            onClick={editProduct}
+            onClick={() =>
+              dispatch(
+                editProduct({
+                  id: params.id,
+                  productInfo,
+                  navigate,
+                })
+              )
+            }
           >
             Edit
           </Button>
         </Grid>
       </Grid>
-      <BackDrop open={open} setOpen={setOpen} />
+      <BackDrop open={open} />
     </Grid>
   );
 };

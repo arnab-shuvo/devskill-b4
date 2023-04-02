@@ -1,41 +1,30 @@
 import { Grid } from "@mui/material";
 import { useEffect } from "react";
-import axios from "axios";
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import { useState } from "react";
 import BackDrop from "../../components/BackDrop/BackDrop";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { increment } from "../../reducer/exampleReducer";
-import { setProducts } from "../../reducer/productsReducer";
+import { getProducts } from "../../action/product";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const counter = useSelector((store) => store.exampleReducer.count);
-  const products = useSelector((store) => store.productsReducer.products);
-
-  const [open, setOpen] = useState(false);
+  const counter = useSelector((store) => store.example.count);
+  const products = useSelector((store) => store.products.products);
+  const open = useSelector((store) => store.loader.open);
 
   useEffect(() => {
     console.log(`Total products viewed ${counter}`);
     if (products.length) {
       return;
     }
-
-    setOpen(!open);
-    axios
-      .get("https://api.escuelajs.co/api/v1/products?offset=0&limit=11")
-      .then((response) => {
-        setOpen(false);
-        // setProducts(response.data);
-        dispatch(setProducts(response.data));
-      });
+    dispatch(getProducts(), getProducts.fulfilled);
   }, []);
 
   const showProduct = (id) => {
@@ -71,7 +60,7 @@ const Home = () => {
           );
         })}
       </Grid>
-      <BackDrop open={open} setOpen={setOpen} />
+      <BackDrop open={open} />
     </Grid>
   );
 };

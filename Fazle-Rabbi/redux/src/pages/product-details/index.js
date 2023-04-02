@@ -1,8 +1,6 @@
 import { useEffect } from "react";
-import axios from "axios";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
 import BackDrop from "../../components/BackDrop/BackDrop";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
@@ -16,90 +14,22 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Divider from "@mui/material/Divider";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setProductDetails,
-  setProducts,
-  setEditProduct,
-} from "../../reducer/productsReducer";
-
-const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "title", headerName: "Product Title", width: 330 },
-  {
-    field: "category",
-    headerName: "Category",
-    width: 90,
-  },
-  {
-    field: "price",
-    headerName: "Price",
-    type: "number",
-    width: 90,
-  },
-  {
-    field: "updatedAt",
-    headerName: "Last Updated",
-    width: 200,
-  },
-];
+import { setProductDetails } from "../../reducer/productsReducer";
+import { setOpen, setConfirm } from "../../reducer/loaderReducer";
+import { getProduct, deleteProduct } from "../../action/product";
+import { columns } from "./columns";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
   const dispatch = useDispatch();
-  const product = useSelector((store) => store.productsReducer.productDetails);
 
-  const [open, setOpen] = useState(false);
-  const [confirm, setConfirm] = useState(false);
-
-  const deleteProduct = (id) => {
-    console.log("delete");
-
-    setOpen(!open);
-    axios
-      .delete(`https://api.escuelajs.co/api/v1/products/${id}`)
-      .then((res) => {
-        setConfirm(false);
-        setOpen(false);
-        dispatch(setProducts([]));
-        navigate("/");
-      })
-      .catch((err) => {
-        setConfirm(false);
-        setOpen(false);
-        alert("Error deleting product");
-      });
-  };
+  const product = useSelector((store) => store.products.productDetails);
+  const open = useSelector((store) => store.loader.open);
+  const confirm = useSelector((store) => store.loader.confirm);
 
   useEffect(() => {
-    setOpen(!open);
-    axios
-      .get(`https://api.escuelajs.co/api/v1/products/${params.id}`)
-      .then((response) => {
-        setOpen(false);
-        dispatch(
-          setProductDetails([
-            {
-              id: response.data.id,
-              title: response.data.title,
-              description: response.data.description,
-              images: response.data.images,
-              category: response.data.category.name,
-              price: response.data.price,
-              updatedAt: response.data.updatedAt,
-            },
-          ])
-        );
-        dispatch(
-          setEditProduct({
-            title: response.data.title,
-            price: response.data.price,
-            description: response.data.description,
-            image: response.data.images[0],
-          })
-        );
-      });
-
+    dispatch(getProduct(params.id));
     return () => {
       console.log("unmounting");
       dispatch(setProductDetails([{}]));
@@ -125,7 +55,7 @@ const ProductDetails = () => {
             <Button onClick={() => navigate(`/edit-product/${product[0].id}`)}>
               Edit
             </Button>
-            <Button onClick={() => setConfirm(true)}>Delete</Button>
+            <Button onClick={() => dispatch(setConfirm(true))}>Delete</Button>
           </div>
           <Divider />
           <Typography gutterBottom variant="p" component="div" p={3}>
@@ -152,11 +82,10 @@ const ProductDetails = () => {
           </div>
         </div>
       )}
-      {/* </Grid> */}
-      <BackDrop open={open} setOpen={setOpen} />
+      <BackDrop open={open} setOpen={dispatch(setOpen)} />
       <Dialog
         open={confirm}
-        onClose={() => setConfirm(false)}
+        onClose={() => dispatch(setConfirm(false))}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -170,8 +99,18 @@ const ProductDetails = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setConfirm(false)}>Cancel</Button>
-          <Button onClick={() => deleteProduct(product[0].id)} autoFocus>
+          <Button onClick={() => dispatch(setConfirm(false))}>Cancel</Button>
+          <Button
+            onClick={() =>
+              dispatch(
+                deleteProduct({
+                  id: product[0].id,
+                  navigate,
+                })
+              )
+            }
+            autoFocus
+          >
             Confirm
           </Button>
         </DialogActions>

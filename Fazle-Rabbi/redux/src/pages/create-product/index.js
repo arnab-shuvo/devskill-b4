@@ -2,67 +2,19 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BackDrop from "../../components/BackDrop/BackDrop";
 import { useSelector, useDispatch } from "react-redux";
-import { setProducts, setProductInfo } from "../../reducer/productsReducer";
+import { setProductInfo } from "../../reducer/productsReducer";
+import { createProduct } from "../../action/product";
 
 const CreateProduct = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const products = useSelector((store) => store.productsReducer.products);
-  const productInfo = useSelector(
-    (store) => store.productsReducer.singleProduct
-  );
-
-  const [open, setOpen] = useState(false);
-  const [validation, setValidation] = useState(false);
-
-  const createProduct = () => {
-    setValidation(true);
-    const price = Number(productInfo.price);
-    if (
-      productInfo.title === "" ||
-      productInfo.price === "" ||
-      productInfo.description === "" ||
-      productInfo.image === "" ||
-      !price
-    )
-      return;
-
-    // submiting the form
-    const payload = {
-      title: productInfo.title,
-      price: price,
-      description: productInfo.description,
-      categoryId: productInfo.categoryId,
-      images: [productInfo.image],
-    };
-
-    setOpen(!open);
-    axios
-      .post(
-        "https://api.escuelajs.co/api/v1/products/",
-        JSON.stringify(payload),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((res) => {
-        console.log("Product created", JSON.stringify(res.data));
-        dispatch(setProducts([...products, res.data]));
-        setOpen(false);
-        navigate("/");
-      })
-      .catch((err) => {
-        setOpen(false);
-        alert("Error creating product");
-      });
-  };
+  const products = useSelector((store) => store.products.products);
+  const open = useSelector((store) => store.loader.open);
+  const validation = useSelector((store) => store.loader.validation);
+  const productInfo = useSelector((store) => store.products.singleProduct);
 
   return (
     <Grid item md={12} xs={12}>
@@ -100,13 +52,21 @@ const CreateProduct = () => {
             size="small"
             variant="contained"
             endIcon={<KeyboardArrowRightIcon />}
-            onClick={createProduct}
+            onClick={() =>
+              dispatch(
+                createProduct({
+                  productInfo,
+                  products,
+                  navigate,
+                })
+              )
+            }
           >
             Create
           </Button>
         </Grid>
       </Grid>
-      <BackDrop open={open} setOpen={setOpen} />
+      <BackDrop open={open} />
     </Grid>
   );
 };

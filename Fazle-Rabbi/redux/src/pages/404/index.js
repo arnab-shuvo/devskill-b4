@@ -1,38 +1,17 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Box } from "@mui/material";
-
-const giphy = {
-  baseURL: "https://api.giphy.com/v1/gifs/",
-  apiKey: "0UTRbFtkMxAplrohufYco5IY74U8hOes",
-  tag: "south park",
-  type: "random",
-  rating: "pg-13",
-};
-let giphyURL = encodeURI(
-  giphy.baseURL +
-    giphy.type +
-    "?api_key=" +
-    giphy.apiKey +
-    "&tag=" +
-    giphy.tag +
-    "&rating=" +
-    giphy.rating
-);
+import { giphyURL } from "./giphyURL";
+import { useSelector, useDispatch } from "react-redux";
+import { getGif } from "../../action/errorGifs";
 
 const NotFound = () => {
-  const [gif, setGif] = useState("");
+  const dispatch = useDispatch();
+  const gif = useSelector((store) => store.loader.gif);
+
   useEffect(() => {
-    const url = giphyURL;
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => {
-        const errorImage = res.data.images.original.url;
-        setGif(errorImage);
-      })
-      .catch((err) =>
-        setGif("https://media4.giphy.com/media/km7QNaRa2LW4FxeWDW/giphy.gif")
-      );
+    dispatch(getGif(giphyURL));
   }, []);
+
   return (
     <Box
       style={{

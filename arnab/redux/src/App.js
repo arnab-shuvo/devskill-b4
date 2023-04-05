@@ -1,32 +1,22 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-} from "./Reducer/counterSlice";
-import { listOfProduct } from "./Reducer/productSlice";
 import { getAllProduct } from "./Action/product";
+import { userLogin } from "./Action/user";
 
 const App = () => {
-  // const count = useSelector((store) => store.counter.count);
   const products = useSelector((store) => store.products.productList);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // axios.get("https://api.escuelajs.co/api/v1/products").then((res) => {
-    //   dispatch(listOfProduct(res.data));
-    //   dispatch(increment(res.data));
-    // });
     dispatch(getAllProduct());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
       <div>
+        <button onClick={() => dispatch(userLogin())}>Login</button>
         {/* <button
           aria-label="Increment value"
           onClick={() => dispatch(increment())}

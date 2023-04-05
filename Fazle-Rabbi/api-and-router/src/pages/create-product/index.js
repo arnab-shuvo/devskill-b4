@@ -5,9 +5,11 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import BackDrop from "../../components/BackDrop/BackDrop";
 
 const CreateProduct = ({ products, setProducts }) => {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
   const [validation, setValidation] = useState(false);
   const [productInfo, setProductInfo] = useState({
     title: "",
@@ -38,39 +40,27 @@ const CreateProduct = ({ products, setProducts }) => {
       images: [productInfo.image],
     };
 
-    // axios
-    //   .post("https://api.escuelajs.co/api/v1/products/", {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     data: JSON.stringify(payload),
-    //   })
+    setOpen(!open);
     axios
-      .request({
-        method: "post",
-        url: "https://api.escuelajs.co/api/v1/products/",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify(payload),
-      })
+      .post(
+        "https://api.escuelajs.co/api/v1/products/",
+        JSON.stringify(payload),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         console.log("Product created", JSON.stringify(res.data));
         setProducts([...products, res.data]);
+        setOpen(false);
         navigate("/");
       })
-      .catch((err) => alert("Error creating product"));
-
-    // reseting the validation
-    // setValidation(false);
-
-    // setProductInfo({
-    //   title: "",
-    //   price: "",
-    //   description: "",
-    //   categoryId: 1,
-    //   image: "",
-    // });
+      .catch((err) => {
+        setOpen(false);
+        alert("Error creating product");
+      });
   };
 
   return (
@@ -113,6 +103,7 @@ const CreateProduct = ({ products, setProducts }) => {
           </Button>
         </Grid>
       </Grid>
+      <BackDrop open={open} setOpen={setOpen} />
     </Grid>
   );
 };

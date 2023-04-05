@@ -7,19 +7,31 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import { useState } from "react";
+import BackDrop from "../../components/BackDrop/BackDrop";
+import { useNavigate } from "react-router-dom";
 
 const Home = ({ products, setProducts }) => {
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     if (products.length) {
       console.log("Products already loaded");
       return;
     }
+
+    setOpen(!open);
     axios
       .get("https://api.escuelajs.co/api/v1/products?offset=0&limit=11")
       .then((response) => {
+        setOpen(false);
         setProducts(response.data);
       });
   }, []);
+
+  const showProduct = (id) => {
+    navigate(`/product-details/${id}`);
+  };
 
   return (
     <Grid container spacing={2} justifyContent="center">
@@ -27,7 +39,10 @@ const Home = ({ products, setProducts }) => {
         {products.map((product) => {
           return (
             <Grid key={product.id} item xs={12} md={4}>
-              <Card sx={{ maxWidth: 345 }}>
+              <Card
+                sx={{ maxWidth: 345 }}
+                onClick={() => showProduct(product.id)}
+              >
                 <CardActionArea>
                   <CardMedia
                     component="img"
@@ -49,6 +64,7 @@ const Home = ({ products, setProducts }) => {
           );
         })}
       </Grid>
+      <BackDrop open={open} setOpen={setOpen} />
     </Grid>
   );
 };

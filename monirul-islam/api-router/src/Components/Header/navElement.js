@@ -21,6 +21,7 @@ export const MenuLink = styled(Link)`
     color: #000000;
   }
 `
+
 export const SignUpLink = styled(Link)`
   color: #fff;
   display: flex;
@@ -54,3 +55,4 @@ export const Menu = styled.div`
     display: none;
   }
 `
+

@@ -24,8 +24,6 @@ const App = () => {
     dispatch(getAllProduct());
   }, []);
 
-  console.log(products, "==productList");
-
   return (
     <div>
       <div>

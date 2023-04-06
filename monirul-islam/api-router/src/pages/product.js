@@ -12,43 +12,31 @@ import Typography from '@mui/material/Typography';
 import Navbar from '../Components/Header/navBar';
 import { Link } from 'react-router-dom';
 import getProducts from './product.thunk';
-import reset from './product.slice';
-import ProductDetail from './productDetail.js';
 import { useDispatch, useSelector } from "react-redux";
 
 function Product() {
   const dispatch = useDispatch();
-  //const [products, setProduct] = useState([]);
-  const products=useSelector((state)=>state.product);
-  console.log(products);
-  // useEffect(() => {
-  //   axios
-  //     .get("https://api.escuelajs.co/api/v1/products?offset=0&limit=20")
-  //     .then((res) => {setProduct(res.data)
-      
-  //     });
-     
-  // }, []);
- 
+  const products=useSelector((state)=>state.product.productList);
+  console.log(products,"==product");
+
   useEffect(() => {
        dispatch(getProducts());
-    // return () => {
-    //     dispatch(reset());
-    // };
+      
     }, [getProducts]);
 
+    console.log(products,"==product");
   return (<>
     <Navbar />
-    {!getProducts && (
+    {!products && (
                 <Grid container spacing={2} justifyContent="center">
 
                     <h3 style={{ color: "red" }}> Loading...</h3>
                 </Grid>
             )}
 
-      {getProducts && (
+      {products && (
     <Grid container spacing={2}>
-      {getProducts.map((prod) => (
+      {products.map((prod) => (
         <Grid key={prod.id} item xs={8} lg={2}>
           <Card sx={{ maxWidth: 345 }}>
             <CardMedia

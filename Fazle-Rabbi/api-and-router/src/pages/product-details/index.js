@@ -1,58 +1,166 @@
-import { Grid } from "@mui/material";
 import { useEffect } from "react";
 import axios from "axios";
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
 import { useState } from "react";
 import BackDrop from "../../components/BackDrop/BackDrop";
 import { useLocation } from "react-router-dom";
+import Box from "@mui/material/Box";
+import { DataGrid } from "@mui/x-data-grid";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Divider from "@mui/material/Divider";
+import { useParams } from "react-router-dom";
 
-const ProductDetails = () => {
-  const location = useLocation();
+const columns = [
+  { field: "id", headerName: "ID", width: 70 },
+  { field: "title", headerName: "Product Title", width: 330 },
+  {
+    field: "category",
+    headerName: "Category",
+    width: 90,
+  },
+  {
+    field: "price",
+    headerName: "Price",
+    type: "number",
+    width: 90,
+  },
+  {
+    field: "updatedAt",
+    headerName: "Last Updated",
+    width: 200,
+  },
+];
+
+const ProductDetails = ({ setProducts }) => {
+  const navigate = useNavigate();
+  const params = useParams();
   const [open, setOpen] = useState(false);
-  const [product, setProduct] = useState({});
+  const [confirm, setConfirm] = useState(false);
+  const [product, setProduct] = useState([{}]);
+
+  const deleteProduct = (id) => {
+    console.log("delete");
+
+    setOpen(!open);
+    axios
+      .delete(`https://api.escuelajs.co/api/v1/products/${id}`)
+      .then((res) => {
+        setConfirm(false);
+        setOpen(false);
+        setProducts([]);
+        navigate("/");
+      })
+      .catch((err) => {
+        setConfirm(false);
+        setOpen(false);
+        alert("Error deleting product");
+      });
+  };
+
   useEffect(() => {
     setOpen(!open);
     axios
-      .get(`https://api.escuelajs.co/api/v1/products/${location.state.id}`)
+      .get(`https://api.escuelajs.co/api/v1/products/${params.id}`)
       .then((response) => {
         setOpen(false);
-        setProduct(response.data);
+        setProduct([
+          {
+            id: response.data.id,
+            title: response.data.title,
+            description: response.data.description,
+            image: response.data.images[0],
+            category: response.data.category.name,
+            price: response.data.price,
+            updatedAt: response.data.updatedAt,
+          },
+        ]);
       });
   }, []);
 
   return (
-    <Grid container spacing={2} justifyContent="center">
-      <Grid item container lg={8} spacing={2}>
-        {product.id && (
-          <Grid key={product.id} item xs={12} md={4}>
-            <Card sx={{ maxWidth: 345 }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={product.images[0]}
-                  alt="product image"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {product.name}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {product.description}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        )}
-      </Grid>
+    <>
+      {product[0].id && (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+          }}
+        >
+          <div
+            style={{
+              marginLeft: "auto",
+            }}
+          >
+            {" "}
+            <Button
+              onClick={() =>
+                navigate(`/edit-product/${product[0].id}`, {
+                  state: { product },
+                })
+              }
+            >
+              Edit
+            </Button>
+            <Button onClick={() => setConfirm(true)}>Delete</Button>
+          </div>
+          <Divider />
+          <Typography gutterBottom variant="p" component="div" p={3}>
+            {product[0].description}
+          </Typography>
+          <Box
+            style={{
+              height: "350px",
+              width: "100%",
+              position: "relative",
+              backgroundImage: `url(${product[0].image})`,
+              backgroundSize: "auto",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          ></Box>
+          <div style={{ height: 400, width: "100%" }}>
+            <DataGrid
+              rows={product}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+            />
+          </div>
+        </div>
+      )}
+      {/* </Grid> */}
       <BackDrop open={open} setOpen={setOpen} />
-    </Grid>
+      <Dialog
+        open={confirm}
+        onClose={() => setConfirm(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Are you sure you want to delete the prouct?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            You will lose this product forever, for the rest of your life. Make
+            this decision with all your heart. Really, think about it.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConfirm(false)}>Cancel</Button>
+          <Button onClick={() => deleteProduct(product[0].id)} autoFocus>
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
 

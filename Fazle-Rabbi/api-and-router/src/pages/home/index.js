@@ -30,7 +30,7 @@ const Home = ({ products, setProducts }) => {
   }, []);
 
   const showProduct = (id) => {
-    navigate(`/product-details/${id}`, { state: { id } });
+    navigate(`/product-details/${id}`);
   };
 
   return (

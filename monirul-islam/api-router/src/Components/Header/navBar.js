@@ -1,5 +1,5 @@
 import React from 'react'
-import { PrimaryNav, MenuLink, Menu, Hamburger, SignUpLink } from './navElement'
+import { PrimaryNav, MenuLink, Menu, Hamburger, SignUpLink,Bars } from './navElement'
 const Navbar = () => {
     return (
         <>
@@ -10,7 +10,7 @@ const Navbar = () => {
                         Home
           </MenuLink>
                     <MenuLink to="/create-product" activeStyle>
-                        Create_Product
+                        Create Product
           </MenuLink>
                     <MenuLink to="/product-list" activeStyle>
                         Product

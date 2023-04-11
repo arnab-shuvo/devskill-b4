@@ -8,18 +8,18 @@ import ProductDetail from './pages/productDetail';
 import CreateProduct from './pages/create-product/index';
 import NotFound from './pages/404/index';
 import { BrowserRouter,  Route, Routes } from 'react-router-dom';
+import { Provider } from "react-redux";
+import App from "./App";
+import store from "./store";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <BrowserRouter>
-    <Routes>
-       <Route path='/' element={<Home/>}/>
-           <Route path="product-list" element={<Product/>}/>
-           <Route path="/productDetail/:id" element={<ProductDetail/>}/>
-           <Route path="create-product" element={<CreateProduct/>}/>
-           <Route path="/*" element={<NotFound/>}/>
-       </Routes>
-       </BrowserRouter>
+    
+     <Provider store={store}>   
+             <App/>
+       </Provider>
+      
+      
 );
 
 

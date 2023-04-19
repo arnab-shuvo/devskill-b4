@@ -76,7 +76,7 @@ const Signup = () => {
             <TextField
               style={{ margin: "20px 0" }}
               id="standard-basic"
-              label="Last Name *"
+              label="Last Name"
               placeholder="Please Enter Last Name"
               fullWidth
               variant="outlined"

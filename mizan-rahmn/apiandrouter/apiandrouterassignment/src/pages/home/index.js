@@ -25,6 +25,34 @@ function App() {
   const getProductDetail = (id) => {
     console.log(id, "===productId");
   }
+  const arr = ['a', 'b'];
+  const arr3 = arr.slice();
+  console.log(arr3, "===arr3");
+  arr3.push('c')
+  console.log(arr3, "===arr3 with c");
+
+  const obj = {
+    a: {
+      // To safely update obj.a.c, we have to copy each piece
+      c: 3
+    },
+    b: 2
+  }
+
+  const obj2 = {
+    // copy obj
+    ...obj,
+    // overwrite a
+    a: {
+      // copy obj.a
+      ...obj.a,
+      // overwrite c
+      c: 42
+    }
+  }
+
+  console.log(obj, "===obj");
+  console.log(obj2, "===obj2");
 
   return (
     

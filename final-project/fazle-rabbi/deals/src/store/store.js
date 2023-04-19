@@ -10,8 +10,6 @@ const persistConfig = {
   storage,
 };
 
-// const persistProductReducers = persistReducer(persistConfig, productsReducer);
-// const persistLoaderReducers = persistReducer(persistConfig, loaderReducer);
 const persistLoginReducer = persistReducer(persistConfig, loginReducer);
 
 export const store = configureStore({
@@ -21,13 +19,5 @@ export const store = configureStore({
     login: persistLoginReducer,
   },
 });
-
-// export default configureStore({
-//   reducer: {
-//     products: productsReducer,
-//     loader: loaderReducer,
-//     login: loginReducer,
-//   },
-// });
 
 export const persistor = persistStore(store);

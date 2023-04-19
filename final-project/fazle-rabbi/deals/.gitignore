@@ -1,2 +1,4 @@
 .env
 .eslintcache
+.DS_Store
+/seed

@@ -6,32 +6,39 @@ import { NavLink } from "../NavLink/NavLink";
 import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import Sidebar from "../Sidebar/Sidebar";
-import { setLogout } from "../../store/reducer/loginReducer";
+import { setLogout } from "../../store/reducer/userReducer";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
+import IconButton from "@mui/material/IconButton";
+import CottageIcon from "@mui/icons-material/Cottage";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const ref = useRef();
   const dispatch = useDispatch();
-  const loggedIn = useSelector((store) => store.login.activeUser.loggedIn);
+  const navigate = useNavigate();
+  const loggedIn = useSelector((store) => store.user.activeUser.loggedIn);
   return (
     <AppBar position="static">
       <Toolbar component="div">
         <Grid
           container
           direction="row"
-          justifyContent="flex-start"
+          justifyContent="space-between"
           alignItems="center"
         >
           <Grid item xs={12} md={1}>
+            {" "}
+            <IconButton onClick={() => navigate("/")}>
+              <CottageIcon />
+            </IconButton>
+          </Grid>
+          <Grid item xs={12} md={1}>
             <Sidebar />
           </Grid>
-          <Grid item xs={12} md={1}>
-            <NavLink to="/">Home</NavLink>
-          </Grid>
-          <Grid item xs={12} md={1}>
+          {/* <Grid item xs={12} md={1}>
             <NavLink to="/create-product">Create</NavLink>
-          </Grid>
+          </Grid> */}
           <Grid item xs={12} md={1}>
             <NavLink
               ref={ref}

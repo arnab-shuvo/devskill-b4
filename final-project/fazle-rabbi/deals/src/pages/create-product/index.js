@@ -24,33 +24,35 @@ const CreateProduct = () => {
   return (
     <Grid item md={12} xs={12}>
       <Grid container spacing={2} direction="column" alignItems="center">
-        {["title", "price", "description", "image"].map((component) => {
-          return (
-            <Grid key={component} item xs={12}>
-              <TextField
-                required
-                fullWidth
-                label={component}
-                variant="standard"
-                value={productInfo[`${component}`]}
-                {...register(component, {
-                  required: "Value Required!",
-                  onChange: (e) =>
-                    dispatch(
-                      setProductInfo({
-                        ...productInfo,
-                        [component]: e.target.value,
-                      })
-                    ),
-                })}
-              />
-              {errors[component] && <p>{errors[component].message}</p>}
-              {component === "price" &&
-                productInfo.price !== "" &&
-                !Number(productInfo.price) && <p>Number Value required!</p>}
-            </Grid>
-          );
-        })}
+        {["title", "price", "description", "image", "stock", "category"].map(
+          (component) => {
+            return (
+              <Grid key={component} item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  label={component}
+                  variant="standard"
+                  value={productInfo[`${component}`]}
+                  {...register(component, {
+                    required: "Value Required!",
+                    onChange: (e) =>
+                      dispatch(
+                        setProductInfo({
+                          ...productInfo,
+                          [component]: e.target.value,
+                        })
+                      ),
+                  })}
+                />
+                {errors[component] && <p>{errors[component].message}</p>}
+                {/* {component === "price" &&
+                  productInfo.price !== "" &&
+                  !Number(productInfo.price) && <p>Number Value required!</p>} */}
+              </Grid>
+            );
+          }
+        )}
         <Grid item xs={12} mb={4}>
           <Button
             size="small"

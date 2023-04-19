@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setLogin } from "../reducer/loginReducer";
+import { setLogin } from "../reducer/userReducer";
 
 export const userSignup = (data) => {
   return async () => {
@@ -14,7 +14,6 @@ export const userLogin = (data) => {
       `${process.env.REACT_APP_BASE_URL}/signin`,
       data
     );
-    console.log(loginData.data.userInfo);
     dispatch(setLogin(loginData.data.userInfo));
   };
 };

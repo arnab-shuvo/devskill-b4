@@ -6,19 +6,26 @@ import { useNavigate } from "react-router-dom";
 import { userLogin } from "../../store/action/user";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { setOpen } from "../../store/reducer/loaderReducer";
+import BackDrop from "../../components/BackDrop/BackDrop";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loggedIn = useSelector((store) => store.login.activeUser.loggedIn);
+  const open = useSelector((store) => store.loader.open);
+  const loggedIn = useSelector((store) => store.user.activeUser.loggedIn);
   const login = (data) => {
     dispatch(userLogin(data));
   };
 
   useEffect(() => {
-    if (loggedIn) {
-      navigate("/");
-    }
+    dispatch(setOpen(true));
+    setTimeout(() => {
+      if (loggedIn) {
+        navigate("/");
+      }
+      dispatch(setOpen(false));
+    }, 600);
   }, [loggedIn]);
 
   const {
@@ -51,6 +58,7 @@ const Login = () => {
           Not Registered? Please <Link href="/signup">Sign Up</Link>
         </p>
       </Box>
+      <BackDrop open={open} />
     </>
   );
 };

@@ -8,8 +8,9 @@ const productsSlice = createSlice({
       title: "",
       price: "",
       description: "",
-      categoryId: 1,
       image: "",
+      stock: 0,
+      category: {},
     },
     productDetails: [{}],
     editProduct: {
@@ -17,6 +18,8 @@ const productsSlice = createSlice({
       price: "",
       description: "",
       image: "",
+      stock: 0,
+      category: {},
     },
   },
   reducers: {

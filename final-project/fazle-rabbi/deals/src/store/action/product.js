@@ -3,39 +3,48 @@ import {
   setProducts,
   setProductDetails,
   setEditProduct,
-  setProductInfo,
 } from "../../store/reducer/productsReducer";
 import { setOpen, setConfirm } from "../../store/reducer/loaderReducer";
 
-export const getProducts = () => {
+export const getProducts = (token) => {
   return async (dispatch) => {
     dispatch(setOpen(true));
     const response = await axios.get(
-      "https://api.escuelajs.co/api/v1/products?offset=0&limit=11"
+      `${process.env.REACT_APP_BASE_URL}/products`,
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      }
     );
+    console.log(response.data);
     dispatch(setProducts(response.data));
     dispatch(setOpen(false));
     return response.data;
   };
 };
 
-export const getProduct = (id) => {
+export const getProduct = (id, token) => {
   return async (dispatch) => {
     dispatch(setOpen(true));
     const response = await axios.get(
-      `https://api.escuelajs.co/api/v1/products/${id}`
+      `${process.env.REACT_APP_BASE_URL}/products/${id}`,
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      }
     );
-
     dispatch(
       setProductDetails([
         {
-          id: response.data.id,
+          id: response.data._id,
           title: response.data.title,
           description: response.data.description,
-          images: response.data.images,
-          category: response.data.category.name,
+          image: response.data.image,
           price: response.data.price,
-          updatedAt: response.data.updatedAt,
+          stock: response.data.stock,
+          category: response.data.category,
         },
       ])
     );
@@ -44,7 +53,9 @@ export const getProduct = (id) => {
         title: response.data.title,
         price: response.data.price,
         description: response.data.description,
-        image: response.data.images[0],
+        image: response.data.image,
+        stock: response.data.stock,
+        category: response.data.category,
       })
     );
     dispatch(setOpen(false));
@@ -54,48 +65,49 @@ export const getProduct = (id) => {
 
 export const createProduct = (args) => {
   return async (dispatch) => {
-    try {
-      const productInfo = args.productInfo;
-      const price = Number(productInfo.price);
+    // try {
+    //   const productInfo = args.productInfo;
+    //   const price = Number(productInfo.price);
 
-      // submiting the form
-      const payload = {
-        title: productInfo.title,
-        price: price,
-        description: productInfo.description,
-        categoryId: productInfo.categoryId,
-        images: [productInfo.image],
-      };
+    //   // submiting the form
+    //   const payload = {
+    //     title: productInfo.title,
+    //     price: price,
+    //     description: productInfo.description,
+    //     categoryId: productInfo.categoryId,
+    //     images: [productInfo.image],
+    //   };
 
-      dispatch(setOpen(true));
-      const res = await axios.post(
-        "https://api.escuelajs.co/api/v1/products/",
-        JSON.stringify(payload),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("Product created", JSON.stringify(res.data));
-      dispatch(setProducts([...args.products, res.data]));
-      dispatch(
-        setProductInfo({
-          title: "",
-          price: "",
-          description: "",
-          categoryId: 1,
-          image: "",
-        })
-      );
+    //   dispatch(setOpen(true));
+    //   const res = await axios.post(
+    //     "https://api.escuelajs.co/api/v1/products/",
+    //     JSON.stringify(payload),
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    //   console.log("Product created", JSON.stringify(res.data));
+    //   dispatch(setProducts([...args.products, res.data]));
+    //   dispatch(
+    //     setProductInfo({
+    //       title: "",
+    //       price: "",
+    //       description: "",
+    //       categoryId: 1,
+    //       image: "",
+    //     })
+    //   );
 
-      dispatch(setOpen(false));
-    } catch {
-      dispatch(setOpen(false));
-      alert("Error creating product");
-    } finally {
-      return;
-    }
+    //   dispatch(setOpen(false));
+    // } catch {
+    //   dispatch(setOpen(false));
+    //   alert("Error creating product");
+    // } finally {
+    //   return;
+    // }
+    console.log(args);
   };
 };
 

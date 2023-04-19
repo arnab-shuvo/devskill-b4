@@ -3,7 +3,6 @@ import * as React from "react";
 import Typography from "@mui/material/Typography";
 import BackDrop from "../../components/BackDrop/BackDrop";
 import Box from "@mui/material/Box";
-import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
@@ -17,7 +16,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProductDetails } from "../../store/reducer/productsReducer";
 import { setOpen, setConfirm } from "../../store/reducer/loaderReducer";
 import { getProduct, deleteProduct } from "../../store/action/product";
-import { columns } from "./columns";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -25,11 +23,12 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
 
   const product = useSelector((store) => store.products.productDetails);
+  const token = useSelector((store) => store.user.activeUser.accessToken);
   const open = useSelector((store) => store.loader.open);
   const confirm = useSelector((store) => store.loader.confirm);
 
   useEffect(() => {
-    dispatch(getProduct(params.id));
+    dispatch(getProduct(params.id, token));
     return () => {
       dispatch(setProductDetails([{}]));
     };
@@ -65,19 +64,19 @@ const ProductDetails = () => {
               height: "350px",
               width: "100%",
               position: "relative",
-              backgroundImage: `url(${product[0].images[0]})`,
+              backgroundImage: `url(${
+                process.env.REACT_APP_BASE_URL + product[0].image
+              })`,
               backgroundSize: "auto",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
             }}
           ></Box>
           <div style={{ height: 400, width: "100%" }}>
-            <DataGrid
-              rows={product}
-              columns={columns}
-              pageSize={5}
-              rowsPerPageOptions={[5]}
-            />
+            <>{product[0].title}</>
+            <>{product[0].price}</>
+            <>{product[0].stock}</>
+            <>{product[0].category.name}</>
           </div>
         </div>
       )}

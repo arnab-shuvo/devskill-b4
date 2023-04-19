@@ -15,13 +15,14 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products = useSelector((store) => store.products.products);
+  const token = useSelector((store) => store.user.activeUser.accessToken);
   const open = useSelector((store) => store.loader.open);
 
   useEffect(() => {
     if (products.length) {
       return;
     }
-    dispatch(getProducts(), getProducts.fulfilled);
+    dispatch(getProducts(token), getProducts.fulfilled);
   }, []);
 
   const showProduct = (id) => {
@@ -33,16 +34,16 @@ const Home = () => {
       <Grid item container lg={8} spacing={2}>
         {products.map((product) => {
           return (
-            <Grid key={product.id} item xs={12} md={4}>
+            <Grid key={product._id} item xs={12} md={4}>
               <Card
                 sx={{ maxWidth: 345 }}
-                onClick={() => showProduct(product.id)}
+                onClick={() => showProduct(product._id)}
               >
                 <CardActionArea>
                   <CardMedia
                     component="img"
                     height="140"
-                    image={product.images[0]}
+                    image={process.env.REACT_APP_BASE_URL + product.image}
                     alt="product image"
                   />
                   <CardContent>

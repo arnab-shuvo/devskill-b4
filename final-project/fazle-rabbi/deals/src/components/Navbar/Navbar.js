@@ -19,7 +19,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const loggedIn = useSelector((store) => store.user.activeUser.loggedIn);
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Toolbar component="div">
         <Grid
           container

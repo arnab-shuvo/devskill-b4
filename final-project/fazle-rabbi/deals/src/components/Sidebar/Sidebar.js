@@ -14,7 +14,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Sidebar() {
   const [state, setState] = React.useState({
-    left: false,
+    bottom: false,
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -63,7 +63,7 @@ export default function Sidebar() {
     </Box>
   );
 
-  const anchor = "left";
+  const anchor = "bottom";
   return (
     <div>
       <React.Fragment>

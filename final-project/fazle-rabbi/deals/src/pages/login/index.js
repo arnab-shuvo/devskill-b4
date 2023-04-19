@@ -5,27 +5,21 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userLogin } from "../../store/action/user";
 import { useEffect } from "react";
-import { setLogout } from "../../store/reducer/loginReducer";
-import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedIn = useSelector((store) => store.login.activeUser.loggedIn);
-  const { state } = useLocation();
   const login = (data) => {
-    dispatch(userLogin(data)).then(navigate("/"));
+    dispatch(userLogin(data));
   };
 
   useEffect(() => {
-    console.log(state);
-    if (state && state.logout) {
-      dispatch(setLogout());
-    } else if (loggedIn) {
+    if (loggedIn) {
       navigate("/");
     }
-  }, []);
+  }, [loggedIn]);
 
   const {
     register,

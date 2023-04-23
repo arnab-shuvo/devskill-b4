@@ -43,7 +43,7 @@ function App() {
       />
       <Route
         path="/profile"
-        element={<Layout title="User">{<User />}</Layout>}
+        element={<Layout title="Profile">{<User />}</Layout>}
       />
       <Route
         path="/logout"

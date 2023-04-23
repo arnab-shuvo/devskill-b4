@@ -5,6 +5,7 @@ const loaderSlice = createSlice({
   initialState: {
     open: false,
     confirm: false,
+    openModal: false,
     gif: "https://media4.giphy.com/media/km7QNaRa2LW4FxeWDW/giphy.gif",
   },
   reducers: {
@@ -14,12 +15,16 @@ const loaderSlice = createSlice({
     setConfirm: (state, action) => {
       state.confirm = action.payload;
     },
+    setOpenModal: (state, action) => {
+      state.openModal = action.payload;
+    },
     setGif: (state, action) => {
       state.gif = action.payload;
     },
   },
 });
 
-export const { setOpen, setConfirm, setGif } = loaderSlice.actions;
+export const { setOpen, setConfirm, setGif, setOpenModal } =
+  loaderSlice.actions;
 
 export default loaderSlice.reducer;

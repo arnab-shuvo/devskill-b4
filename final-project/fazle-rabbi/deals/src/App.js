@@ -3,11 +3,12 @@ import { Route, Routes } from "react-router-dom";
 import ProductDetails from "./pages/product-details";
 import NotFound from "./pages/404";
 import CreateProduct from "./pages/create-product";
-import EditProduct from "./pages/edit-product";
+import EditProduct from "./components/AddToCart/AddToCart";
 import Home from "./pages/home";
 import Layout from "./components/Layout/Layout";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
+import User from "./pages/user";
 
 function App() {
   return (
@@ -39,6 +40,14 @@ function App() {
       <Route
         path="/*"
         element={<Layout title="Invalid Link">{<NotFound />}</Layout>}
+      />
+      <Route
+        path="/profile"
+        element={<Layout title="User">{<User />}</Layout>}
+      />
+      <Route
+        path="/logout"
+        element={<Layout title="Login">{<Login logOut={true} />}</Layout>}
       />
     </Routes>
   );

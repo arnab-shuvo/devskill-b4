@@ -6,34 +6,23 @@ import {
 } from "../../store/reducer/productsReducer";
 import { setOpen, setConfirm } from "../../store/reducer/loaderReducer";
 
-export const getProducts = (token) => {
+export const getProducts = () => {
   return async (dispatch) => {
     dispatch(setOpen(true));
     const response = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/products`,
-      {
-        headers: {
-          Authorization: `bearer ${token}`,
-        },
-      }
+      `${process.env.REACT_APP_BASE_URL}/products`
     );
-    console.log(response.data);
     dispatch(setProducts(response.data));
     dispatch(setOpen(false));
     return response.data;
   };
 };
 
-export const getProduct = (id, token) => {
+export const getProduct = (id) => {
   return async (dispatch) => {
     dispatch(setOpen(true));
     const response = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/products/${id}`,
-      {
-        headers: {
-          Authorization: `bearer ${token}`,
-        },
-      }
+      `${process.env.REACT_APP_BASE_URL}/products/${id}`
     );
     dispatch(
       setProductDetails([

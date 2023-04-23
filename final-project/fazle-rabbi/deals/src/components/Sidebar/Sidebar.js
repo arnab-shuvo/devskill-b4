@@ -8,14 +8,39 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
+  const loggedIn = useSelector((store) => store.user.activeUser.loggedIn);
+  const role = useSelector((store) => store.user.activeUser.role);
+  const navigate = useNavigate();
   const [state, setState] = React.useState({
-    bottom: false,
+    left: false,
   });
+  const [userMenu, setUserMenu] = React.useState([]);
+
+  const handleClick = (item) => {
+    const { link } = item;
+    navigate(link);
+  };
+
+  useEffect(() => {
+    const newUserMenu = [];
+    if (loggedIn) {
+      if (role === "admin") {
+        newUserMenu.push({ name: "Dashboard", link: "/admin" });
+      }
+      newUserMenu.push({ name: "Profile", link: "/profile" });
+      newUserMenu.push({ name: "Logout", link: "/logout" });
+    } else {
+      newUserMenu.push({ name: "Login", link: "/login" });
+    }
+    setUserMenu(newUserMenu);
+  }, [loggedIn]);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -36,38 +61,26 @@ export default function Sidebar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
+        {userMenu.map((item, index) => (
+          <ListItem key={item.name} disablePadding>
+            <ListItemButton onClick={() => handleClick(item)}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <InboxIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
       <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
     </Box>
   );
 
-  const anchor = "bottom";
+  const anchor = "left";
   return (
     <div>
       <React.Fragment>
-        <IconButton onClick={toggleDrawer(anchor, true)}>
+        <IconButton color="primary" onClick={toggleDrawer(anchor, true)}>
           <MenuIcon />
         </IconButton>
         <Drawer

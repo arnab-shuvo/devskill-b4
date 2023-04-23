@@ -15,14 +15,14 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products = useSelector((store) => store.products.products);
-  const token = useSelector((store) => store.user.activeUser.accessToken);
+  const token = useSelector((store) => store.user.activeUser.token);
   const open = useSelector((store) => store.loader.open);
 
   useEffect(() => {
     if (products.length) {
       return;
     }
-    dispatch(getProducts(token), getProducts.fulfilled);
+    dispatch(getProducts(), getProducts.fulfilled);
   }, []);
 
   const showProduct = (id) => {

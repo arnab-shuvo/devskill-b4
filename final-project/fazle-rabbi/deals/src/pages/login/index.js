@@ -8,8 +8,9 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { setOpen } from "../../store/reducer/loaderReducer";
 import BackDrop from "../../components/BackDrop/BackDrop";
+import { setLogout } from "../../store/reducer/userReducer";
 
-const Login = () => {
+const Login = ({ logOut }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const open = useSelector((store) => store.loader.open);
@@ -20,6 +21,9 @@ const Login = () => {
 
   useEffect(() => {
     dispatch(setOpen(true));
+    if (logOut) {
+      dispatch(setLogout());
+    }
     setTimeout(() => {
       if (loggedIn) {
         navigate("/");
@@ -39,6 +43,7 @@ const Login = () => {
       <form onSubmit={handleSubmit(login)}>
         <input
           type="text"
+          autocomplete="off"
           placeholder="Email"
           {...register("email", {
             required: true,
@@ -46,6 +51,7 @@ const Login = () => {
         />
         <input
           type="password"
+          autocomplete="off"
           placeholder="Password"
           {...register("password", {
             required: true,

@@ -3,11 +3,10 @@ import Box from "@mui/material/Box";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { userSignup } from "../../store/action/user";
-import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -15,7 +14,7 @@ const Signup = () => {
   } = useForm();
 
   const signup = (data) => {
-    dispatch(userSignup(data)).then(navigate("/login"));
+    dispatch(userSignup(data));
   };
   return (
     <>

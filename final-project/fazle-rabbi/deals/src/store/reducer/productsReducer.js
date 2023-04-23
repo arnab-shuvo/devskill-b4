@@ -5,6 +5,7 @@ const productsSlice = createSlice({
   initialState: {
     products: [],
     singleProduct: {
+      id: "",
       title: "",
       price: "",
       description: "",
@@ -14,6 +15,7 @@ const productsSlice = createSlice({
     },
     productDetails: [{}],
     editProduct: {
+      id: "",
       title: "",
       price: "",
       description: "",

@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Home from "./pages/home";
 import ProductList from "./pages/ProductList";
+import AuthProvider from "./components/AuthProvider";
 
 function App() {
   return (

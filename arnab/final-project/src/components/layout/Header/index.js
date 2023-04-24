@@ -5,6 +5,9 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import { MenuLink, MenuBar } from "./styled";
+import AuthProvider from "../../AuthProvider";
+import { useSelector } from "react-redux";
+import { redirect } from "react-router-dom";
 
 const pages = [
   {
@@ -18,6 +21,10 @@ const pages = [
   {
     name: "Blog",
     url: "/blog",
+  },
+  {
+    name: "Account",
+    url: "/login",
   },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];

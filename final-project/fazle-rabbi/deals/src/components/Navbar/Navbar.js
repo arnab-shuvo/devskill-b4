@@ -14,7 +14,7 @@ export default function Navbar() {
   const ref = useRef();
   const navigate = useNavigate();
   const loggedIn = useSelector((store) => store.user.activeUser.loggedIn);
-  const user = useSelector((store) => store.user.activeUser.user);
+  const user = useSelector((store) => store.user.userDetails.firstname);
   return (
     <AppBar position="sticky">
       <Toolbar component="div">
@@ -53,7 +53,7 @@ export default function Navbar() {
                 }}
               >
                 <NavLink ref={ref} to={"/profile"}>
-                  {loggedIn ? `${user}` : ""}
+                  {loggedIn ? `Hi ${user}!` : ""}
                 </NavLink>
               </Box>
             </Grid>

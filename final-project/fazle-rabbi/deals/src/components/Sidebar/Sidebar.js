@@ -34,6 +34,7 @@ export default function Sidebar() {
       if (role === "admin") {
         newUserMenu.push({ name: "Dashboard", link: "/admin" });
       }
+      newUserMenu.push({ name: "View cart", link: "/cart" });
       newUserMenu.push({ name: "Profile", link: "/profile" });
       newUserMenu.push({ name: "Logout", link: "/logout" });
     } else {

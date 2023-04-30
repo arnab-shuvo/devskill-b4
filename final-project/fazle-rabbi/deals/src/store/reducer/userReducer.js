@@ -8,10 +8,12 @@ const loginSlice = createSlice({
       role: "",
       user: "",
       loggedIn: false,
+      cart: {
+        products: [],
+      },
     },
-    cart: {
-      products: [],
-    },
+    userDetails: {},
+    order: [],
   },
   reducers: {
     setLogin: (state, action) => {
@@ -23,14 +25,21 @@ const loginSlice = createSlice({
         role: "",
         user: "",
         loggedIn: false,
+        cart: {
+          products: [],
+        },
       };
     },
+    setUserDetails: (state, action) => {
+      state.userDetails = action.payload;
+    },
     setCart: (state, action) => {
-      state.cart = action.payload;
+      state.activeUser.cart = action.payload;
     },
   },
 });
 
-export const { setLogin, setLogout, setCart } = loginSlice.actions;
+export const { setLogin, setLogout, setCart, setUserDetails } =
+  loginSlice.actions;
 
 export default loginSlice.reducer;

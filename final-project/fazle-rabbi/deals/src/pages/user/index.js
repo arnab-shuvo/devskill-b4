@@ -1,26 +1,29 @@
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import BackDrop from "../../components/BackDrop/BackDrop";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import Paper from "@mui/material/Paper";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import { setConfirm } from "../../store/reducer/loaderReducer";
-import { removeCart } from "../../store/action/user";
+import { useForm } from "react-hook-form";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import TextField from "@mui/material/TextField";
+import { userEdit } from "../../store/action/user";
 
 const User = () => {
   const dispatch = useDispatch();
 
-  const { products, _id } = useSelector((store) => store.user.cart);
+  const { products } = useSelector((store) => store.user.activeUser.cart);
   const [totalPrice, setTotalPrice] = useState(0);
-  const open = useSelector((store) => store.loader.open);
-  const confirm = useSelector((store) => store.loader.confirm);
+  const order = useSelector((store) => store.user.order);
   const token = useSelector((store) => store.user.activeUser.token);
+  const userDetails = useSelector((store) => store.user.userDetails);
+  const { address, _id, __v, role, password, ...user } = userDetails;
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
+  const disableInput = watch("disableInput");
   useEffect(() => {
     setTotalPrice(
       products.reduce((acc, item) => {
@@ -30,51 +33,66 @@ const User = () => {
   }, []);
 
   return (
-    <Grid container spacing={2} direction="column" alignItems="center">
-      {products.map((item) => {
-        return (
-          <Grid key={item._id} item>
-            <Paper elevation={2} sx={{ p: 2 }}>
-              <div>{item.productId.title}</div>
-              <div>{item.quantity}</div>
-              <div>Price: {item.productId.price * item.quantity}</div>
-            </Paper>
-          </Grid>
-        );
-      })}
-      {products.length > 0 && (
-        <>
-          <div>{Math.ceil(totalPrice)}</div>
-          <Button onClick={() => dispatch(setConfirm(true))}>
-            Remove Cart
-          </Button>
-        </>
-      )}
-      <BackDrop open={open} />
-      <Dialog
-        open={confirm}
-        onClose={() => dispatch(setConfirm(false))}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            This will clear all the items from your cart.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => dispatch(setConfirm(false))}>Cancel</Button>
-          <Button
-            onClick={() => {
-              dispatch(removeCart({ _id, token }));
-            }}
-            autoFocus
-          >
-            Confirm
-          </Button>
-        </DialogActions>
-      </Dialog>
+    <Grid
+      container
+      spacing={2}
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      <Grid item xs={12} md={4} ml={4}>
+        {user &&
+          Object.keys(user).map((item) => {
+            return (
+              <TextField
+                fullWidth
+                label={item}
+                variant="standard"
+                defaultValue={user[`${item}`]}
+                {...register(item, {
+                  required: false,
+                })}
+              />
+            );
+          })}
+        <TextField
+          fullWidth
+          label="new password"
+          type="password"
+          disabled={!disableInput}
+          variant="standard"
+          {...register("password", {
+            required: false,
+          })}
+        />
+        <label htmlFor="disableInput">
+          <input
+            {...register("disableInput")}
+            type="checkbox"
+            id="disableInput"
+          />
+          Add new password
+        </label>
+        <Button
+          size="small"
+          variant="contained"
+          endIcon={<AddShoppingCartIcon />}
+          onClick={handleSubmit((e) => {
+            dispatch(
+              userEdit({
+                payload: { ...userDetails, ...e },
+                token,
+              })
+            );
+          })}
+        >
+          Save Changes
+        </Button>
+      </Grid>
+      <Grid item xs={12} md={6} ml={4}>
+        {order.length === 0 && <h4>No Orders found for this User</h4>}
+        {/* {order && <h1>Order History</h1>} */}
+      </Grid>
     </Grid>
   );
 };

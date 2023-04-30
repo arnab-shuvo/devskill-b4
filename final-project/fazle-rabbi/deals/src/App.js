@@ -9,6 +9,7 @@ import Layout from "./components/Layout/Layout";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import User from "./pages/user";
+import Cart from "./pages/cart";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
         path="/logout"
         element={<Layout title="Login">{<Login logOut={true} />}</Layout>}
       />
+      <Route path="/cart" element={<Layout title="">{<Cart />}</Layout>} />
     </Routes>
   );
 }

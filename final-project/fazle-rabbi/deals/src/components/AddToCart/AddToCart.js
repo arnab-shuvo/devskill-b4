@@ -22,7 +22,7 @@ const style = {
   p: 4,
 };
 
-const EditProduct = ({ id }) => {
+const AddToCart = ({ id }) => {
   const dispatch = useDispatch();
   const {
     register,
@@ -94,4 +94,4 @@ const EditProduct = ({ id }) => {
   );
 };
 
-export default EditProduct;
+export default AddToCart;

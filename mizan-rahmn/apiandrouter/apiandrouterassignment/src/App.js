@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/home';
 import ProductDetail from './pages/product-detail';
 import NotFound from './pages/404';
+import CreateProduct from './pages/create-product';
 
 function App() {
   const [products, setProduct] = useState([]);
@@ -22,6 +23,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/product-detail/:id" element={<ProductDetail />} />
+      <Route path="/create-product" element={<CreateProduct />} />
       <Route path="/*" element={<NotFound />} />
     </Routes>
   );

@@ -10,38 +10,44 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { setConfirm } from "../../store/reducer/loaderReducer";
-import { setCart } from "../reducer/userReducer";
+import { removeCart } from "../../store/action/user";
 
 const Cart = () => {
   const dispatch = useDispatch();
 
-  const { products } = useSelector((store) => store.user.activeUser.cart);
+  const { products, status, message } = useSelector(
+    (store) => store.user.activeUser.cart
+  );
   const [totalPrice, setTotalPrice] = useState(0);
   const open = useSelector((store) => store.loader.open);
   const confirm = useSelector((store) => store.loader.confirm);
+  const token = useSelector((store) => store.user.activeUser.token);
 
   useEffect(() => {
     setTotalPrice(
-      products.reduce((acc, item) => {
-        return acc + item.productId.price * item.quantity;
-      }, 0)
+      products
+        ? products.reduce((acc, item) => {
+            return acc + item.productId.price * item.quantity;
+          }, 0)
+        : 0
     );
   }, []);
 
   return (
     <Grid container spacing={2} direction="column" alignItems="center">
-      {products.map((item) => {
-        return (
-          <Grid key={item._id} item>
-            <Paper elevation={2} sx={{ p: 2 }}>
-              <div>{item.productId.title}</div>
-              <div>{item.quantity}</div>
-              <div>Price: {item.productId.price * item.quantity}</div>
-            </Paper>
-          </Grid>
-        );
-      })}
-      {products.length > 0 && (
+      {products &&
+        products.map((item) => {
+          return (
+            <Grid key={item._id} item>
+              <Paper elevation={2} sx={{ p: 2 }}>
+                <div>{item.productId.title}</div>
+                <div>{item.quantity}</div>
+                <div>Price: {item.productId.price * item.quantity}</div>
+              </Paper>
+            </Grid>
+          );
+        })}
+      {products?.length > 0 && (
         <>
           <div>{Math.ceil(totalPrice)}</div>
           <Button onClick={() => dispatch(setConfirm(true))}>
@@ -49,6 +55,7 @@ const Cart = () => {
           </Button>
         </>
       )}
+      {status === "error" && <div>{message}</div>}
       <BackDrop open={open} />
       <Dialog
         open={confirm}
@@ -66,11 +73,7 @@ const Cart = () => {
           <Button onClick={() => dispatch(setConfirm(false))}>Cancel</Button>
           <Button
             onClick={() => {
-              dispatch(
-                setCart({
-                  products: [],
-                })
-              );
+              dispatch(removeCart(token));
             }}
             autoFocus
           >

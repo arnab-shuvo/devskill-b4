@@ -18,14 +18,8 @@ function App() {
         path="/"
         element={<Layout title="All Products">{<Home />}</Layout>}
       />
-      <Route
-        path="/login"
-        element={<Layout title="Login">{<Login />}</Layout>}
-      />
-      <Route
-        path="/signup"
-        element={<Layout title="Sign up">{<Signup />}</Layout>}
-      />
+      <Route path="/login" element={<Layout title="">{<Login />}</Layout>} />
+      <Route path="/signup" element={<Layout title="">{<Signup />}</Layout>} />
       <Route
         path="/product-details/:id"
         element={<Layout title="Product Detail">{<ProductDetails />}</Layout>}

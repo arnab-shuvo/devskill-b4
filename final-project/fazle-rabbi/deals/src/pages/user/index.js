@@ -11,7 +11,6 @@ const User = () => {
   const dispatch = useDispatch();
 
   const { products } = useSelector((store) => store.user.activeUser.cart);
-  const [totalPrice, setTotalPrice] = useState(0);
   const order = useSelector((store) => store.user.order);
   const token = useSelector((store) => store.user.activeUser.token);
   const userDetails = useSelector((store) => store.user.userDetails);
@@ -24,13 +23,6 @@ const User = () => {
   } = useForm();
 
   const disableInput = watch("disableInput");
-  useEffect(() => {
-    setTotalPrice(
-      products.reduce((acc, item) => {
-        return acc + item.productId.price * item.quantity;
-      }, 0)
-    );
-  }, []);
 
   return (
     <Grid

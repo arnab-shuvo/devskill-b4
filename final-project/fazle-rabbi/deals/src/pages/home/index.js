@@ -15,7 +15,6 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let products = useSelector((store) => store.products.products);
-  const token = useSelector((store) => store.user.activeUser.token);
   const open = useSelector((store) => store.loader.open);
 
   useEffect(() => {

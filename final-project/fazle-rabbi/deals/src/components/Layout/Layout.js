@@ -6,6 +6,7 @@ import Footer from "../Footer/Footer";
 import Snackbar from "@mui/material/Snackbar";
 import { useDispatch, useSelector } from "react-redux";
 import { setToast } from "../../store/reducer/loaderReducer";
+import Divider from "@mui/material/Divider";
 
 export default function Layout({ children, title }) {
   document.title = title;
@@ -21,7 +22,8 @@ export default function Layout({ children, title }) {
         {title}
       </Typography>
       {children}
-      <Footer sx={{ mt: 20, mb: 4 }} />
+      <Divider sx={{ mt: 20, mb: 4 }} />
+      <Footer sx={{ mb: 4 }} />
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         autoHideDuration={3000}

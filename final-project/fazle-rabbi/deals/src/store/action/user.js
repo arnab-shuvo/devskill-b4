@@ -1,5 +1,10 @@
 import axios from "axios";
-import { setLogin, setCart, setUserDetails } from "../reducer/userReducer";
+import {
+  setLogin,
+  setCart,
+  setUserDetails,
+  setOrder,
+} from "../reducer/userReducer";
 import {
   setOpen,
   setConfirm,
@@ -73,8 +78,20 @@ export const userEdit = (data) => {
 export const getUserDetails = () => {
   return async (dispatch) => {
     const loginData = await axios.get(`${process.env.REACT_APP_BASE_URL}/user`);
-    console.log(loginData.data);
     dispatch(setLogin(loginData.data.userInfo));
+  };
+};
+
+export const getCart = (data) => {
+  return async (dispatch) => {
+    dispatch(setOpen(true));
+    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/cart`, {
+      headers: {
+        Authorization: `bearer ${data.token}`,
+      },
+    });
+    dispatch(setCart(response.data));
+    dispatch(setOpen(false));
   };
 };
 
@@ -91,7 +108,6 @@ export const addToCart = (data) => {
       }
     );
     dispatch(setOpen(false));
-    console.log(response.data);
     if (response.data.err) {
       return;
     }
@@ -103,15 +119,11 @@ export const addToCart = (data) => {
 export const removeCart = (token) => {
   return async (dispatch) => {
     dispatch(setOpen(true));
-    const response = await axios.delete(
-      `${process.env.REACT_APP_BASE_URL}/cart`,
-      {
-        headers: {
-          Authorization: `bearer ${token}`,
-        },
-      }
-    );
-    console.log(response.data);
+    await axios.delete(`${process.env.REACT_APP_BASE_URL}/cart`, {
+      headers: {
+        Authorization: `bearer ${token}`,
+      },
+    });
     dispatch(
       setCart({
         products: [],
@@ -119,5 +131,50 @@ export const removeCart = (token) => {
     );
     dispatch(setConfirm(false));
     dispatch(setOpen(false));
+  };
+};
+
+export const getMyOrders = (token) => {
+  return async (dispatch) => {
+    dispatch(setOpen(true));
+    const response = await axios.get(
+      `${process.env.REACT_APP_BASE_URL}/order/my-order`,
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      }
+    );
+    dispatch(setOrder(response.data));
+    dispatch(setOpen(false));
+  };
+};
+
+export const patchOrder = (data) => {
+  return async (dispatch) => {
+    await axios.patch(
+      `${process.env.REACT_APP_BASE_URL}/order/${data.orderId}`,
+      data.payload,
+      {
+        headers: {
+          Authorization: `bearer ${data.token}`,
+        },
+      }
+    );
+    dispatch(setToast("Order Updated!"));
+  };
+};
+
+export const checkout = (token) => {
+  return async (dispatch) => {
+    dispatch(setOpen(true));
+
+    await axios.get(`${process.env.REACT_APP_BASE_URL}/order/checkout`, {
+      headers: {
+        Authorization: `bearer ${token}`,
+      },
+    });
+    dispatch(setOpen(false));
+    dispatch(setToast("Order Has Been Placed!"));
   };
 };

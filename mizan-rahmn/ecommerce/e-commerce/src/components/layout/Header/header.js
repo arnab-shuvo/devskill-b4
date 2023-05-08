@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
+import Button from "@mui/material";
 
 const pages = [
   {
@@ -18,11 +19,19 @@ const pages = [
   },
   {
     name: "Product",
-    url: "/product-list",
+    url: "/product",
   },
   {
     name: "Blog",
     url: "/blog",
+  },
+  {
+    name: "Login",
+    url: "/Login",
+  },
+  {
+    name: "SignUp",
+    url: "/SignUp",
   },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -44,7 +53,6 @@ const Header = (props) => {
               </MenuLink>
             ))}
           </Box>
-          
         </Toolbar>
       </Container>
     </MenuBar>

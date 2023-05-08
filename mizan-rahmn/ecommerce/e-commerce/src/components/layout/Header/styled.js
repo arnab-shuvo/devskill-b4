@@ -7,6 +7,7 @@ export const MenuLink = styled(NavLink)({
   display: "inline-block",
   padding: "0px 30px 0 0 ",
   textDecoration: "none",
+  //float: "right",
   "&.active": {
     color: "yellow",
   },

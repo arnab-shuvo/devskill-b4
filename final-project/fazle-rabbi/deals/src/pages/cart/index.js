@@ -10,7 +10,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { setConfirm } from "../../store/reducer/loaderReducer";
-import { setCart } from "../reducer/userReducer";
+import { setCart } from "../../store/reducer/userReducer";
 
 const Cart = () => {
   const dispatch = useDispatch();

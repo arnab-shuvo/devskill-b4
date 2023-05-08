@@ -41,12 +41,12 @@ function getStatusColor(status) {
 const User = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const order = useSelector((store) => store.user.activeUser.order);
+  const orders = useSelector((store) => store.user.activeUser.order);
   const open = useSelector((store) => store.loader.open);
   const token = useSelector((store) => store.user.activeUser.token);
   const userDetails = useSelector((store) => store.user.userDetails);
   const { address, _id, __v, role, password, ...user } = userDetails;
-  const [orderss, setOrderss] = useState([]);
+  const [ordersWithStatus, setOrdersWithStatus] = useState([]);
   const [chunks, setChunks] = useState(1);
   const [page, setPage] = useState(0);
   const {
@@ -64,10 +64,9 @@ const User = () => {
 
   const handleChange = (event) => {
     const { value: status, name: orderId } = event.target;
-    // console.log(orderId);
     dispatch(patchOrder({ orderId, token, payload: { status } }));
-    setOrderss(
-      orderss.map((item) => {
+    setOrdersWithStatus(
+      ordersWithStatus.map((item) => {
         if (item._id === orderId) {
           return { ...item, status };
         }
@@ -81,7 +80,8 @@ const User = () => {
   }, []);
 
   useEffect(() => {
-    const orderCopy = [...order];
+    if (!orders || orders.length === 0) return;
+    const orderCopy = [...orders];
     const data = chunk(orderCopy.reverse(), 5);
     setChunks(data.length);
     const modifiedOrders = data[page].map((item) => {
@@ -92,8 +92,8 @@ const User = () => {
         .toFixed(2);
       return { ...item, totalPrice };
     });
-    setOrderss(modifiedOrders);
-  }, [order, page]);
+    setOrdersWithStatus(modifiedOrders);
+  }, [orders, page]);
 
   return (
     <Grid
@@ -166,34 +166,35 @@ const User = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {orderss.map((row) => (
-              <TableRow key={row._id}>
-                <TableCell>{row.date}</TableCell>
-                <TableCell>{row._id}</TableCell>
-                <TableCell align="right">{`${row.totalPrice}`}</TableCell>
-                <TableCell>
-                  {" "}
-                  <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                    <Select
-                      name={row._id}
-                      labelId="status"
-                      id="status"
-                      value={row.status}
-                      onChange={handleChange}
-                      sx={{
-                        backgroundColor: getStatusColor(row.status),
-                        color: "black",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      <MenuItem value={0}>Pending</MenuItem>
-                      <MenuItem value={1}>Placed Order</MenuItem>
-                      <MenuItem value={2}>Canceled Order</MenuItem>
-                    </Select>
-                  </FormControl>
-                </TableCell>
-              </TableRow>
-            ))}
+            {ordersWithStatus &&
+              ordersWithStatus.map((row) => (
+                <TableRow key={row._id}>
+                  <TableCell>{row.date}</TableCell>
+                  <TableCell>{row._id}</TableCell>
+                  <TableCell align="right">{`${row.totalPrice}`}</TableCell>
+                  <TableCell>
+                    {" "}
+                    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                      <Select
+                        name={row._id}
+                        labelId="status"
+                        id="status"
+                        value={row.status}
+                        onChange={handleChange}
+                        sx={{
+                          backgroundColor: getStatusColor(row.status),
+                          color: "black",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        <MenuItem value={0}>Pending</MenuItem>
+                        <MenuItem value={1}>Placed Order</MenuItem>
+                        <MenuItem value={2}>Canceled Order</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
         <Stack spacing={2} mt={4}>

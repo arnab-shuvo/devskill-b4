@@ -116,24 +116,6 @@ export const addToCart = (data) => {
   };
 };
 
-export const removeCart = (token) => {
-  return async (dispatch) => {
-    dispatch(setOpen(true));
-    await axios.delete(`${process.env.REACT_APP_BASE_URL}/cart`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    });
-    dispatch(
-      setCart({
-        products: [],
-      })
-    );
-    dispatch(setConfirm(false));
-    dispatch(setOpen(false));
-  };
-};
-
 export const getMyOrders = (token) => {
   return async (dispatch) => {
     dispatch(setOpen(true));

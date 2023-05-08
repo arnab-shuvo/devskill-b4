@@ -3,13 +3,6 @@ import Button from "@mui/material/Button";
 import BackDrop from "../../components/BackDrop/BackDrop";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import { setConfirm } from "../../store/reducer/loaderReducer";
-import { removeCart } from "../../store/action/user";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -21,7 +14,6 @@ import styled from "@emotion/styled";
 import { checkout, getCart } from "../../store/action/user";
 
 import { Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 const rattle = keyframes`
   0% {
@@ -47,7 +39,6 @@ const Cart = () => {
 
   const [totalPrice, setTotalPrice] = useState(0);
   const open = useSelector((store) => store.loader.open);
-  const confirm = useSelector((store) => store.loader.confirm);
   const token = useSelector((store) => store.user.activeUser.token);
 
   useEffect(() => {
@@ -151,42 +142,9 @@ const Cart = () => {
           >
             CHECKOUT
           </StyledButton>
-
-          <Button
-            variant="outlined"
-            size="small"
-            color="error"
-            onClick={() => dispatch(setConfirm(true))}
-          >
-            Remove Cart
-          </Button>
         </>
       )}
       <BackDrop open={open} />
-      <Dialog
-        open={confirm}
-        onClose={() => dispatch(setConfirm(false))}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            This will clear all the items from your cart.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => dispatch(setConfirm(false))}>Cancel</Button>
-          <Button
-            onClick={() => {
-              dispatch(removeCart(token));
-            }}
-            autoFocus
-          >
-            Confirm
-          </Button>
-        </DialogActions>
-      </Dialog>
     </Grid>
   );
 };

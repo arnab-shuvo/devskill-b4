@@ -4,31 +4,14 @@ import { NavLink } from "../NavLink/NavLink";
 import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import Sidebar from "../Sidebar/Sidebar";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import IconButton from "@mui/material/IconButton";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import styled from "@emotion/styled";
-import { keyframes } from "@mui/system";
 import Avatar from "@mui/material/Avatar";
-
-const rattle = keyframes`
-  0% {
-    left: -3px;
-  }
-  50% {
-    left: 4px;
-  }
-  100% {
-    left: -3px;
-  }
-`;
-
-const StyledIconButton = styled(IconButton)({
-  animation: `${rattle} .7s 5 linear`,
-});
+import Badge from "@mui/material/Badge";
 
 function stringToColor(string) {
   let hash = 0;
@@ -67,10 +50,6 @@ export default function Navbar() {
   const lastname = useSelector((store) => store.user.userDetails.lastname);
   const { products } = useSelector((store) => store.user.activeUser.cart);
 
-  useEffect(() => {
-    console.log(products);
-  });
-
   return (
     <AppBar position="sticky">
       <Toolbar component="div">
@@ -91,12 +70,11 @@ export default function Navbar() {
             </Grid>
             <Grid>
               {products?.length > 0 && (
-                <StyledIconButton
-                  color="#fff"
-                  onClick={() => navigate("/cart")}
-                >
-                  <ShoppingCartIcon />
-                </StyledIconButton>
+                <IconButton onClick={() => navigate("/cart")}>
+                  <Badge badgeContent={products.length} color="success">
+                    <ShoppingCartIcon color="action" />
+                  </Badge>
+                </IconButton>
               )}
             </Grid>
           </Grid>

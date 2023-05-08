@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Home from './pages/home';
-import Footer from './components/layout/Footer';
+import Footer from './components/Footer';
 import NotFound from './pages/404';
 
 function App() {

@@ -1,4 +1,4 @@
-import UserLayout from "../../components/layout/UserLayout";
+import UserLayout from "../../components/layout";
 
 
 const Product = () => {

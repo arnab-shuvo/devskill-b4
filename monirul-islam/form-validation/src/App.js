@@ -2,9 +2,7 @@ import {useState} from 'react'
 import AddTaskForm from './component/AddTaskForm.js'
 import UpdateForm from './component/updateForm.js'
 import ToDo from './component/todo.js'
-
 import 'bootstrap/dist/css/bootstrap.min.css'
-
 import './App.css'
 
 function App() {

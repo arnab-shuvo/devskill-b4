@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToast } from "../../store/reducer/loaderReducer";
 import Divider from "@mui/material/Divider";
 
-export default function Layout({ children, title }) {
+export default function Layout({ children, title, background }) {
   document.title = title;
 
   const dispatch = useDispatch();
@@ -16,14 +16,17 @@ export default function Layout({ children, title }) {
 
   const handleClose = () => dispatch(setToast(""));
   return (
-    <Box>
+    <Box
+      sx={{
+        backgroundImage: background,
+      }}
+    >
       <Navbar />
       <Typography ml={2} mt={2} gutterBottom paragraph variant="h6">
         {title}
       </Typography>
       {children}
-      <Divider sx={{ mt: 20, mb: 4 }} />
-      <Footer sx={{ mb: 4 }} />
+      <Footer sx={{ mt: 20, mb: 4 }} />
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         autoHideDuration={3000}

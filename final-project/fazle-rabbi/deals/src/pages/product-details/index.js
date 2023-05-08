@@ -23,6 +23,9 @@ import {
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
+const background =
+  "url(https://images.unsplash.com/photo-1602330041000-4b8119482edf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1760&q=80)";
+
 const ProductDetails = () => {
   const params = useParams();
   const navigate = useNavigate();
@@ -179,10 +182,15 @@ const ProductDetails = () => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby="login"
+        aria-describedby="login-before-checkout"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
-        <SignIn cartCache={payload} />
+        <SignIn cartCache={payload} background={background} />
       </Modal>
     </>
   );

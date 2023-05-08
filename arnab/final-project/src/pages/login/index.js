@@ -9,16 +9,28 @@ import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import Alert from "@mui/material/Alert";
 import { userLogin } from "../../store/actions/userAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "@mui/material/Link";
+import { useEffect } from "react";
+import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { userInfo } = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    if (userInfo.token) {
+      console.log("in effect");
+      navigate("/");
+    }
+  }, [userInfo.token]);
 
   const onSubmit = (data) => {
     dispatch(userLogin(data));

@@ -26,7 +26,11 @@ const productsSlice = createSlice({
   },
   reducers: {
     setProducts: (state, action) => {
-      state.products = action.payload;
+      const products = action.payload.map((v) => ({
+        ...v,
+        discount: Math.random() > 0.7 ? Math.floor(Math.random() * 50) : 0,
+      }));
+      state.products = products;
     },
     setProductInfo: (state, action) => {
       state.singleProduct = action.payload;

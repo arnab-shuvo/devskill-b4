@@ -7,9 +7,9 @@ import EditProduct from "./components/AddToCart/AddToCart";
 import Home from "./pages/home";
 import Layout from "./components/Layout/Layout";
 import Login from "./pages/login";
-import Signup from "./pages/signup";
 import User from "./pages/user";
 import Cart from "./pages/cart";
+import SignUp from "./components/SignUp/SignUp";
 
 function App() {
   return (
@@ -20,11 +20,29 @@ function App() {
       />
       <Route
         path="/login"
-        element={<Layout title="Login">{<Login />}</Layout>}
+        element={
+          <Layout
+            title=""
+            background={
+              "url(https://images.unsplash.com/photo-1602330041000-4b8119482edf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1760&q=80)"
+            }
+          >
+            {<Login />}
+          </Layout>
+        }
       />
       <Route
         path="/signup"
-        element={<Layout title="Sign up">{<Signup />}</Layout>}
+        element={
+          <Layout
+            title=""
+            background={
+              "url(https://images.unsplash.com/photo-1630618148126-74d18effc1b4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)"
+            }
+          >
+            {<SignUp />}
+          </Layout>
+        }
       />
       <Route
         path="/product-details/:id"

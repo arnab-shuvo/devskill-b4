@@ -72,7 +72,6 @@ const AddToCart = ({ id }) => {
             variant="contained"
             endIcon={<AddShoppingCartIcon />}
             onClick={handleSubmit((e) => {
-              console.log(e);
               dispatch(
                 addToCart({
                   payload: {

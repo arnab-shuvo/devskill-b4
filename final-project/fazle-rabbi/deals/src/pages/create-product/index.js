@@ -7,11 +7,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { setProductInfo } from "../../store/reducer/productsReducer";
 import { createProduct } from "../../store/action/product";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -64,7 +62,7 @@ const CreateProduct = () => {
                   productInfo,
                   products,
                 })
-              ).then(() => navigate("/"))
+              )
             )}
           >
             Create

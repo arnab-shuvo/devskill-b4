@@ -10,12 +10,23 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../store/action/product";
 import Box from "@mui/material/Box";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+import { useState } from "react";
+import { chunk } from "lodash";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let products = useSelector((store) => store.products.products);
   const open = useSelector((store) => store.loader.open);
+  const [productsChunks, setProductsChunks] = useState(1);
+  const [productsLength, setProductsLength] = useState(1);
+  const [page, setPage] = useState(0);
+
+  const handlePagination = (event, value) => {
+    setPage(value - 1);
+  };
 
   useEffect(() => {
     if (products.length) {
@@ -24,6 +35,14 @@ const Home = () => {
     dispatch(getProducts());
   }, []);
 
+  useEffect(() => {
+    if (!products || products.length === 0) return;
+    const productsCopy = [...products];
+    const data = chunk(productsCopy.reverse(), 5);
+    setProductsLength(data.length);
+    setProductsChunks(data[page]);
+  }, [products, page]);
+
   const showProduct = (id) => {
     navigate(`/product-details/${id}`);
   };
@@ -31,7 +50,7 @@ const Home = () => {
   return (
     <Grid container spacing={2} justifyContent="center">
       <Grid item container lg={8} spacing={2}>
-        {products.map((product, index) => {
+        {productsChunks.map((product, index) => {
           const isFirstItem = index === 0;
           return (
             <Grid
@@ -91,6 +110,16 @@ const Home = () => {
             </Grid>
           );
         })}
+      </Grid>
+      <Grid item container lg={8} spacing={2}>
+        <Stack spacing={2} mt={4}>
+          <Pagination
+            count={productsLength}
+            variant="outlined"
+            shape="rounded"
+            onChange={handlePagination}
+          />
+        </Stack>
       </Grid>
       <BackDrop open={open} />
     </Grid>

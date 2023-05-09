@@ -82,6 +82,7 @@ export const userEdit = (data, isCurrentUser) => {
         },
       }
     );
+    window.location.reload();
   };
 };
 

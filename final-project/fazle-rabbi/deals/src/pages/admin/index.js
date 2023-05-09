@@ -23,23 +23,29 @@ const Admin = () => {
   const [usersChunk, setUsersChunk] = useState([]);
   const [chunks, setChunks] = useState(1);
   const [usersLength, setUsersLength] = useState(1);
-  const [page, setPage] = useState(0);
+  const [ordersPageNumber, setOrdersPageNumber] = useState(0);
+  const [usersPageNumber, setusersPageNumber] = useState(0);
 
-  const handlePagination = (event, value) => {
-    setPage(value - 1);
+  const handleOrdersPagination = (event, value) => {
+    setOrdersPageNumber(value - 1);
+  };
+
+  const handleUsersPagination = (event, value) => {
+    setusersPageNumber(value - 1);
   };
 
   useEffect(() => {
     dispatch(getAllOrders(token));
     dispatch(getAllUsers(token));
-  }, [users]);
+  }, []);
 
   useEffect(() => {
+    console.log("aaa", orders);
     if (!orders || orders.length === 0) return;
     const orderCopy = [...orders];
-    const data = chunk(orderCopy.reverse(), 5);
+    const data = chunk(orderCopy.reverse(), 10);
     setChunks(data.length);
-    const modifiedOrders = data[page].map((item) => {
+    const modifiedOrders = data[ordersPageNumber].map((item) => {
       const totalPrice = item.products
         .reduce((acc, item) => {
           return acc + item.productId.price * item.quantity;
@@ -47,16 +53,17 @@ const Admin = () => {
         .toFixed(2);
       return { ...item, totalPrice };
     });
+    console.log("gg", modifiedOrders);
     setOrdersWithStatus(modifiedOrders);
-  }, [orders, page]);
+  }, [orders, ordersPageNumber]);
 
   useEffect(() => {
     if (!users || users.length === 0) return;
     const userWithoutAdmin = users.filter((item) => item.role !== "admin");
-    const data = chunk(userWithoutAdmin.reverse(), 5);
+    const data = chunk(userWithoutAdmin.reverse(), 10);
     setUsersLength(data.length);
-    setUsersChunk(data[page]);
-  }, [users, page]);
+    setUsersChunk(data[usersPageNumber]);
+  }, [users, usersPageNumber]);
 
   return (
     <Box>
@@ -83,7 +90,7 @@ const Admin = () => {
                 count={chunks}
                 variant="outlined"
                 shape="rounded"
-                onChange={handlePagination}
+                onChange={handleOrdersPagination}
               />
             </Stack>
           </Collapse>
@@ -111,7 +118,7 @@ const Admin = () => {
                 count={usersLength}
                 variant="outlined"
                 shape="rounded"
-                // onChange={handlePagination}
+                onChange={handleUsersPagination}
               />
             </Stack>
           </Collapse>

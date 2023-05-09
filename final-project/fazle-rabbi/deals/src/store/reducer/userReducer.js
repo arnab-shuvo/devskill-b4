@@ -14,6 +14,7 @@ const loginSlice = createSlice({
       order: [],
     },
     userDetails: {},
+    allUsers: [],
   },
   reducers: {
     setLogin: (state, action) => {
@@ -40,10 +41,19 @@ const loginSlice = createSlice({
     setOrder: (state, action) => {
       state.activeUser.order = action.payload;
     },
+    setAllUsers: (state, action) => {
+      state.allUsers = action.payload;
+    },
   },
 });
 
-export const { setLogin, setLogout, setCart, setUserDetails, setOrder } =
-  loginSlice.actions;
+export const {
+  setLogin,
+  setLogout,
+  setCart,
+  setUserDetails,
+  setOrder,
+  setAllUsers,
+} = loginSlice.actions;
 
 export default loginSlice.reducer;

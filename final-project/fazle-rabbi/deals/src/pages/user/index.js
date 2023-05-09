@@ -2,41 +2,22 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import TextField from "@mui/material/TextField";
-import { userEdit } from "../../store/action/user";
 import { useNavigate } from "react-router-dom";
-import Typography from "@mui/material/Typography";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import SaveIcon from "@mui/icons-material/Save";
 import { getMyOrders } from "../../store/action/user";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { patchOrder } from "../../store/action/user";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { chunk } from "lodash";
 import BackDrop from "../../components/BackDrop/BackDrop";
-
-function getStatusColor(status) {
-  switch (status) {
-    case 0:
-      return "#FFC107";
-    case 1:
-      return "#28A745";
-    case 2:
-      return "#DC3545";
-    default:
-      return "gray";
-  }
-}
+import { EditUser } from "./EditUser";
+import { getCurrentUser } from "../../store/action/user";
 
 const User = () => {
   const dispatch = useDispatch();
@@ -45,38 +26,18 @@ const User = () => {
   const open = useSelector((store) => store.loader.open);
   const token = useSelector((store) => store.user.activeUser.token);
   const userDetails = useSelector((store) => store.user.userDetails);
-  const { address, _id, __v, role, password, ...user } = userDetails;
+
   const [ordersWithStatus, setOrdersWithStatus] = useState([]);
   const [chunks, setChunks] = useState(1);
   const [page, setPage] = useState(0);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
-  const disableInput = watch("disableInput");
 
   const handlePagination = (event, value) => {
     setPage(value - 1);
   };
 
-  const handleChange = (event) => {
-    const { value: status, name: orderId } = event.target;
-    dispatch(patchOrder({ orderId, token, payload: { status } }));
-    setOrdersWithStatus(
-      ordersWithStatus.map((item) => {
-        if (item._id === orderId) {
-          return { ...item, status };
-        }
-        return item;
-      })
-    );
-  };
-
   useEffect(() => {
     dispatch(getMyOrders(token));
+    dispatch(getCurrentUser(token));
   }, []);
 
   useEffect(() => {
@@ -103,59 +64,8 @@ const User = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Grid item xs={6} md={3}>
-        <Typography variant="h5" component="h2">
-          User Information
-        </Typography>
-        {user &&
-          Object.keys(user).map((item) => {
-            return (
-              <TextField
-                fullWidth
-                label={item}
-                variant="outlined"
-                defaultValue={user[`${item}`]}
-                {...register(item, {
-                  required: false,
-                })}
-                margin="normal"
-              />
-            );
-          })}
-        <TextField
-          fullWidth
-          label="New password"
-          type="password"
-          disabled={!disableInput}
-          variant="outlined"
-          {...register("password", {
-            required: false,
-          })}
-          margin="normal"
-        />
-        <FormControlLabel
-          control={<Checkbox {...register("disableInput")} />}
-          label="Add new password"
-        />
-        <Button
-          size="medium"
-          variant="contained"
-          color="primary"
-          endIcon={<SaveIcon />}
-          onClick={handleSubmit((e) => {
-            dispatch(
-              userEdit({
-                payload: { ...userDetails, ...e },
-                token,
-              })
-            );
-          })}
-        >
-          Save Changes
-        </Button>
-      </Grid>
+      <EditUser allUserDetails={userDetails} isCurrent={true} />
       <Grid item xs={12} md={7}>
-        <Typography>Recent Orders</Typography>
         <Table size="small">
           <TableHead>
             <TableRow>
@@ -177,19 +87,17 @@ const User = () => {
                     <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                       <Select
                         name={row._id}
+                        disabled
                         labelId="status"
                         id="status"
                         value={row.status}
-                        onChange={handleChange}
                         sx={{
-                          backgroundColor: getStatusColor(row.status),
-                          color: "black",
-                          fontWeight: "bold",
+                          backgroundColor: "black",
                         }}
                       >
                         <MenuItem value={0}>Pending</MenuItem>
-                        <MenuItem value={1}>Placed Order</MenuItem>
-                        <MenuItem value={2}>Canceled Order</MenuItem>
+                        <MenuItem value={1}>Shipped</MenuItem>
+                        <MenuItem value={2}>Delivered</MenuItem>
                       </Select>
                     </FormControl>
                   </TableCell>

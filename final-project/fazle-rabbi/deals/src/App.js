@@ -10,6 +10,7 @@ import Login from "./pages/login";
 import User from "./pages/user";
 import Cart from "./pages/cart";
 import SignUp from "./components/SignUp/SignUp";
+import Admin from "./pages/admin";
 
 function App() {
   return (
@@ -69,6 +70,7 @@ function App() {
         element={<Layout title="Login">{<Login logOut={true} />}</Layout>}
       />
       <Route path="/cart" element={<Layout title="">{<Cart />}</Layout>} />
+      <Route path="/admin" element={<Layout title="">{<Admin />}</Layout>} />
     </Routes>
   );
 }

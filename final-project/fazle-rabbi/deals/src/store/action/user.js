@@ -3,13 +3,10 @@ import {
   setLogin,
   setCart,
   setUserDetails,
+  setAllUsers,
   setOrder,
 } from "../reducer/userReducer";
-import {
-  setOpen,
-  setConfirm,
-  setOpenModal,
-} from "../../store/reducer/loaderReducer";
+import { setOpen, setOpenModal } from "../../store/reducer/loaderReducer";
 import { setToast } from "../../store/reducer/loaderReducer";
 
 export const userSignup = (data) => {
@@ -60,10 +57,24 @@ export const userLogin = (data, cartCache) => {
   };
 };
 
-export const userEdit = (data) => {
+export const userEdit = (data, isCurrentUser) => {
   return async (dispatch) => {
-    const response = await axios.patch(
-      `${process.env.REACT_APP_BASE_URL}/my-detail`,
+    console.log(data);
+    if (isCurrentUser) {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_BASE_URL}/my-detail`,
+        data.payload,
+        {
+          headers: {
+            Authorization: `bearer ${data.token}`,
+          },
+        }
+      );
+      dispatch(setUserDetails(response.data));
+      return;
+    }
+    await axios.patch(
+      `${process.env.REACT_APP_BASE_URL}/user/${data.id}`,
       data.payload,
       {
         headers: {
@@ -71,7 +82,22 @@ export const userEdit = (data) => {
         },
       }
     );
+  };
+};
+
+export const getCurrentUser = (token) => {
+  return async (dispatch) => {
+    dispatch(setOpen(true));
+    const response = await axios.get(
+      `${process.env.REACT_APP_BASE_URL}/my-detail`,
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      }
+    );
     dispatch(setUserDetails(response.data));
+    dispatch(setOpen(false));
   };
 };
 
@@ -128,6 +154,35 @@ export const getMyOrders = (token) => {
       }
     );
     dispatch(setOrder(response.data));
+    dispatch(setOpen(false));
+  };
+};
+
+export const getAllOrders = (token) => {
+  return async (dispatch) => {
+    dispatch(setOpen(true));
+    const response = await axios.get(
+      `${process.env.REACT_APP_BASE_URL}/order`,
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      }
+    );
+    dispatch(setOrder(response.data));
+    dispatch(setOpen(false));
+  };
+};
+
+export const getAllUsers = (token) => {
+  return async (dispatch) => {
+    dispatch(setOpen(true));
+    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/user`, {
+      headers: {
+        Authorization: `bearer ${token}`,
+      },
+    });
+    dispatch(setAllUsers(response.data));
     dispatch(setOpen(false));
   };
 };

@@ -1,4 +1,3 @@
-import React from "react";
 import Navbar from "../Navbar/Navbar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -6,7 +5,6 @@ import Footer from "../Footer/Footer";
 import Snackbar from "@mui/material/Snackbar";
 import { useDispatch, useSelector } from "react-redux";
 import { setToast } from "../../store/reducer/loaderReducer";
-import Divider from "@mui/material/Divider";
 
 export default function Layout({ children, title, background }) {
   document.title = title;

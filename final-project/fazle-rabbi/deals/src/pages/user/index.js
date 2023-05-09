@@ -16,7 +16,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { chunk } from "lodash";
 import BackDrop from "../../components/BackDrop/BackDrop";
-import { EditUser } from "./EditUser";
+import { EditUser } from "../../components/EditUser/EditUser";
 import { getCurrentUser } from "../../store/action/user";
 
 const User = () => {

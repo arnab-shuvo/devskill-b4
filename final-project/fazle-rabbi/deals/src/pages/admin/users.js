@@ -6,7 +6,7 @@ import TableRow from "@mui/material/TableRow";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { EditUser } from "../user/EditUser";
+import { EditUser } from "../../components/EditUser/EditUser";
 import { useState } from "react";
 import { setOpenModal } from "../../store/reducer/loaderReducer";
 import { Modal } from "@mui/material";
@@ -19,7 +19,6 @@ const background =
 
 export const Users = ({ users, setUsers }) => {
   const dispatch = useDispatch();
-  const token = useSelector((store) => store.user.activeUser.token);
   const [user, setUser] = useState(users[0]);
   const [userDetails, setUserDetails] = useState(users[0]);
   const open = useSelector((store) => store.loader.openModal);

@@ -59,7 +59,6 @@ export const userLogin = (data, cartCache) => {
 
 export const userEdit = (data, isCurrentUser) => {
   return async (dispatch) => {
-    console.log(data);
     if (isCurrentUser) {
       const response = await axios.patch(
         `${process.env.REACT_APP_BASE_URL}/my-detail`,

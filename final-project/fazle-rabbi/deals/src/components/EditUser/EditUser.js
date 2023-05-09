@@ -25,9 +25,7 @@ export const EditUser = ({ allUserDetails, isCurrent, background }) => {
 
   const disableInput = watch("disableInput");
 
-  useEffect(() => {
-    console.log("aaa", userInfo);
-  }, [userInfo]);
+  useEffect(() => {}, [userInfo]);
 
   return (
     <Grid

@@ -40,7 +40,6 @@ const Admin = () => {
   }, []);
 
   useEffect(() => {
-    console.log("aaa", orders);
     if (!orders || orders.length === 0) return;
     const orderCopy = [...orders];
     const data = chunk(orderCopy.reverse(), 10);
@@ -53,7 +52,6 @@ const Admin = () => {
         .toFixed(2);
       return { ...item, totalPrice };
     });
-    console.log("gg", modifiedOrders);
     setOrdersWithStatus(modifiedOrders);
   }, [orders, ordersPageNumber]);
 

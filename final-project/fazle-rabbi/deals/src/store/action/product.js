@@ -52,54 +52,6 @@ export const getProduct = (id) => {
   };
 };
 
-export const createProduct = (args) => {
-  return async (dispatch) => {
-    // try {
-    //   const productInfo = args.productInfo;
-    //   const price = Number(productInfo.price);
-
-    //   // submiting the form
-    //   const payload = {
-    //     title: productInfo.title,
-    //     price: price,
-    //     description: productInfo.description,
-    //     categoryId: productInfo.categoryId,
-    //     images: [productInfo.image],
-    //   };
-
-    //   dispatch(setOpen(true));
-    //   const res = await axios.post(
-    //     "https://api.escuelajs.co/api/v1/products/",
-    //     JSON.stringify(payload),
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
-    //   console.log("Product created", JSON.stringify(res.data));
-    //   dispatch(setProducts([...args.products, res.data]));
-    //   dispatch(
-    //     setProductInfo({
-    //       title: "",
-    //       price: "",
-    //       description: "",
-    //       categoryId: 1,
-    //       image: "",
-    //     })
-    //   );
-
-    //   dispatch(setOpen(false));
-    // } catch {
-    //   dispatch(setOpen(false));
-    //   alert("Error creating product");
-    // } finally {
-    //   return;
-    // }
-    console.log(args);
-  };
-};
-
 export const editProduct = (args) => {
   return async (dispatch) => {
     try {

@@ -9,7 +9,6 @@ import Select from "@mui/material/Select";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { patchOrder } from "../../store/action/user";
-import { useEffect } from "react";
 
 function getStatusColor(status) {
   switch (status) {
@@ -27,10 +26,6 @@ function getStatusColor(status) {
 export const Orders = ({ orders, setOrders }) => {
   const dispatch = useDispatch();
   const token = useSelector((store) => store.user.activeUser.token);
-
-  useEffect(() => {
-    console.log(orders);
-  }, []);
 
   const handleChange = (event) => {
     const { value: status, name: orderId } = event.target;

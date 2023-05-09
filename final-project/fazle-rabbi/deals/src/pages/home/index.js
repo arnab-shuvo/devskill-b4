@@ -20,7 +20,7 @@ const Home = () => {
   const dispatch = useDispatch();
   let products = useSelector((store) => store.products.products);
   const open = useSelector((store) => store.loader.open);
-  const [productsChunks, setProductsChunks] = useState(1);
+  const [productsChunks, setProductsChunks] = useState([]);
   const [productsLength, setProductsLength] = useState(1);
   const [page, setPage] = useState(0);
 

@@ -1,0 +1,12 @@
+import UserLayout from "../../components/layout";
+
+
+const Product = () => {
+  return (
+    <>
+        <h3>Product list</h3>
+    </>
+  );
+};
+
+export default Product;

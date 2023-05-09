@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .input {
+        @apply h-12 appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 sm:text-lg;
+    }
+    .input:focus {
+        @apply outline-none ring-indigo-500 border-red-500 z-10;
+    }
+    .error-msg {
+        @apply my-2 font-semibold text-red-600 text-base;
+    }
+    .btn {
+        @apply px-4 py-2 text-lg text-red-400 font-light border-2 rounded-md border-red-400;
+    }
+    .btn:disabled {
+        @apply bg-gray-200 cursor-not-allowed;
+    }
+    .btn:hover {
+        @apply border-red-600 text-red-600;
+    }
+}

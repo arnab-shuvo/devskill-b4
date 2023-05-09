@@ -1,12 +1,14 @@
 
-import Header from "../Header";
+import Header from "../Header/header";
+import Footer from "../Footer";
 
 const UserLayout = (props) => {
   return (
     <>
       {" "}
-      <Header />
+      <Header />      
       {props.children}
+      <Footer />
     </>
   );
 };

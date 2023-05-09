@@ -2,7 +2,6 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import ProductDetails from "./pages/product-details";
 import NotFound from "./pages/404";
-import CreateProduct from "./pages/create-product";
 import EditProduct from "./components/AddToCart/AddToCart";
 import Home from "./pages/home";
 import Layout from "./components/Layout/Layout";
@@ -48,10 +47,6 @@ function App() {
       <Route
         path="/product-details/:id"
         element={<Layout title="Product Detail">{<ProductDetails />}</Layout>}
-      />
-      <Route
-        path="/create-product"
-        element={<Layout title="Create a Product">{<CreateProduct />}</Layout>}
       />
       <Route
         path="/edit-product/:id"
